@@ -1,0 +1,46 @@
+[
+  {
+    "query": "$clarify-requirements-and-design を使ったら質問が止まらなくなった。この repo にバグ issue を作りたい",
+    "should_trigger": true
+  },
+  {
+    "query": "さっき使った distill-decision-signal に表形式を保つオプションが欲しい。機能要望として起票して",
+    "should_trigger": true
+  },
+  {
+    "query": "このリポジトリの skill の使い勝手が悪かったので GitHub にフィードバックしたい",
+    "should_trigger": true
+  },
+  {
+    "query": "orient skill が期待と違う出力をした。再現情報をまとめて issue を作って",
+    "should_trigger": true
+  },
+  {
+    "query": "この skill に新しいユースケースを追加してほしい。ryo-morimoto/skills に enhancement を出して",
+    "should_trigger": true
+  },
+  {
+    "query": "この repo の README の誤字を直して",
+    "should_trigger": false
+  },
+  {
+    "query": "さっき見つけた skill のバグをその場で修正して。issue は不要",
+    "should_trigger": false
+  },
+  {
+    "query": "別の GitHub repository に API の不具合 issue を作って",
+    "should_trigger": false
+  },
+  {
+    "query": "この PR のレビューコメントをまとめて",
+    "should_trigger": false
+  },
+  {
+    "query": "GitHub Issue の書き方を一般論として教えて",
+    "should_trigger": false
+  },
+  {
+    "query": "skill の利用メモをローカルファイルに残して。公開はしないで",
+    "should_trigger": false
+  }
+]

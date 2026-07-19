@@ -1,0 +1,4 @@
+interface:
+  display_name: "Report Feedback on Ryo's Skills"
+  short_description: "Skill 利用時の問題や改善案を GitHub Issue に変える"
+  default_prompt: "Use $report-feedback-on-ryo-skills to turn the problem I just encountered with a repository skill into a reviewed GitHub issue."

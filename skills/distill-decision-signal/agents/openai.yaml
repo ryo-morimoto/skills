@@ -1,0 +1,13 @@
+interface:
+  display_name: Decision Signal Distiller
+  short_description: "AI slop\u3092\u9664\u304D\u3001\u5224\u65AD\u3092\u5909\u3048\
+    \u308B\u60C5\u5831\u3060\u3051\u3092\u9AD8\u5BC6\u5EA6\u306B\u6B8B\u3059"
+  default_prompt: Use $distill-decision-signal to compress this material into only
+    the information that could change a decision, action, or risk assessment.
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

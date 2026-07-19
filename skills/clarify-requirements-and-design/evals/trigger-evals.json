@@ -1,0 +1,66 @@
+[
+  {
+    "query": "要件が曖昧で質問ばかり増える。基本設計に進める形に整理して",
+    "should_trigger": true
+  },
+  {
+    "query": "この新機能の要求とアーキテクチャを一緒に具体化したい",
+    "should_trigger": true
+  },
+  {
+    "query": "協力会社APIとの責任分界と受入条件が決まらない",
+    "should_trigger": true
+  },
+  {
+    "query": "リアルタイム同期と言われたが何を設計driverにすべき？",
+    "should_trigger": true
+  },
+  {
+    "query": "非機能要件が『高速でセキュア』しかない。設計判断できる形にして",
+    "should_trigger": true
+  },
+  {
+    "query": "仕様をgrillしても誰も答えを持っていない。どう探索する？",
+    "should_trigger": true
+  },
+  {
+    "query": "2チームで作る機能の境界と最初のE2E sliceを決めたい",
+    "should_trigger": true
+  },
+  {
+    "query": "将来拡張できるようにと言われたが、過剰設計か判断したい",
+    "should_trigger": true
+  },
+  {
+    "query": "この明確なバグを直して。再現手順と期待値はissueに全部ある",
+    "should_trigger": false
+  },
+  {
+    "query": "READMEの誤字を一箇所直して",
+    "should_trigger": false
+  },
+  {
+    "query": "このPRのコードレビューをして。要件や設計の見直しは不要",
+    "should_trigger": false
+  },
+  {
+    "query": "10チームのSAFe導入計画と組織再編案を作って",
+    "should_trigger": false
+  },
+  {
+    "query": "既に承認済みのAPI仕様どおりにTypeScript clientを実装して",
+    "should_trigger": false
+  },
+  {
+    "query": "データベースのindexの作り方をPostgreSQLの文法で教えて",
+    "should_trigger": false
+  },
+  {
+    "query": "ユーザーストーリーの文法だけチェックして",
+    "should_trigger": false
+  },
+  {
+    "query": "来週の開発会議をリマインドして",
+    "should_trigger": false
+  }
+]

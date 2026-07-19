@@ -1,0 +1,74 @@
+{
+  "skill_name": "clarify-requirements-and-design",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "申請画面をもっと簡単にしたい。要件を詰めて基本設計まで進めて。まだ利用者へのヒアリングはしていない。",
+      "expected_output": "Separates wording, workflow, comprehension, and value uncertainty; avoids an exhaustive questionnaire; proposes a provisional frame and the cheapest evidence that can distinguish the main hypotheses.",
+      "assertions": [
+        "The response states an observable outcome or explicitly marks it as provisional.",
+        "The response distinguishes at least two materially different interpretations of '簡単'.",
+        "The response proposes evidence other than asking the stakeholder for every answer.",
+        "Any question asked is tied to a decision it could change.",
+        "The response includes a stop or decision condition for the next investigation."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "通知機能の基本設計を考えているけど要点が見えない。メールとアプリ内通知が候補。今後SMSもあるかもしれない。",
+      "expected_output": "Surfaces the critical scenarios and design drivers before choosing a notification architecture; treats SMS as a change hypothesis rather than automatic justification for a generic framework.",
+      "assertions": [
+        "The response identifies notification timing, duplication or retry, preference or permission, and failure handling as candidate design drivers.",
+        "The response does not select an architecture solely because SMS may be added later.",
+        "The response proposes a change scenario or evidence to judge whether an extension boundary is warranted.",
+        "The provisional design is limited to what is needed for the next decision or slice."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "協力会社の受注APIとつなぐ。先方はAPI仕様書をくれたが、再送や障害時の責任分界が書かれていない。こちら2人、先方1チーム。どう進める？",
+      "expected_output": "Focuses on the small cross-company boundary: semantics, idempotency, timeout, ownership, change protocol, and an early integration proof, without introducing large-program ceremonies.",
+      "assertions": [
+        "The response separates shared interface facts from each party's internal implementation.",
+        "The response covers duplicate, timeout, and recovery scenarios.",
+        "The response identifies decision and incident owners as unresolved boundary facts.",
+        "The response proposes a contract test, sandbox, sample-data test, or equivalent E2E proof.",
+        "The response does not introduce organization-wide agile frameworks or large-team ceremonies."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "検索を速くしたいと言われた。DBにindexを貼る前提でチケットを切ればいい？",
+      "expected_output": "Keeps the index as one option, locates the actual latency and freshness requirement, and proposes measurement capable of distinguishing UI, query, dependency, and indexing causes.",
+      "assertions": [
+        "The response preserves database indexing as a hypothesis rather than a requirement.",
+        "The response asks for or proposes measuring a workload distribution and response metric.",
+        "The response considers at least one materially different latency source.",
+        "The next step can confirm, reject, or leave the indexing hypothesis unresolved."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "設計レビューして。機能一覧と箱矢印の構成図はあるけど、チーム内で議論が毎回やり直しになる。",
+      "expected_output": "Reviews for missing scenarios, drivers, assumptions, rationale, data and operational boundaries instead of requesting more diagram detail by default.",
+      "assertions": [
+        "The response looks for missing decision drivers and critical scenarios, not only notation defects.",
+        "The response proposes recording alternatives, assumptions, rationale, and revisit conditions.",
+        "The response identifies the smallest scenario or decision to test the current design.",
+        "The response avoids requiring every design view when only a subset is material."
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "日次レポート生成が遅いので非同期ジョブ化したい。現在時間、業務上の締切、利用者の待ち方は未計測。要件と基本設計を決めて。",
+      "expected_output": "Treats asynchronous execution as a candidate rather than a confirmed design, identifies evidence distinguishing total-duration, interaction-blocking, burst, and scheduling problems, and avoids inventing job APIs, states, queues, workers, persistence, retries, polling, or notifications before an independent lifecycle is selected.",
+      "assertions": [
+        "The response does not promote asynchronous execution to a decision solely because the user requested it.",
+        "The response identifies the business deadline and current duration distribution as decision-reversing evidence.",
+        "The response preserves at least one materially different option such as bottleneck optimization or scheduled/precomputed generation.",
+        "Concrete job components, API shapes, states, stores, retry policies, polling, and notifications are omitted or explicitly conditional on scenarios that require them.",
+        "The next investigation states which lifecycle decision its outcomes will unlock and includes a stop rule."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+interface:
+  display_name: "\u66D6\u6627\u8981\u4EF6\u304B\u3089\u57FA\u672C\u8A2D\u8A08\u3078"
+  short_description: "\u66D6\u6627\u306A\u8981\u4EF6\u3092\u8A3C\u62E0\u306B\u5909\
+    \u3048\u3001\u57FA\u672C\u8A2D\u8A08\u306E\u8981\u70B9\u3068\u6B21\u306E\u4E00\
+    \u624B\u3092\u5C0E\u304D\u307E\u3059"
+  default_prompt: Use $clarify-requirements-and-design to turn this ambiguous request
+    into the next evidence, design drivers, and a minimal executable slice.
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

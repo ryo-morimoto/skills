@@ -1,0 +1,42 @@
+[
+  {
+    "query": "issue #42 を進めて",
+    "should_trigger": true
+  },
+  {
+    "query": "この issue を triage して、自動で実装できるか判定して",
+    "should_trigger": true
+  },
+  {
+    "query": "issue 起点の開発ワークフローを回して。#17 から",
+    "should_trigger": true
+  },
+  {
+    "query": "PR の検証が失敗した。issue のワークフローに従って捨てるか直すか判断して",
+    "should_trigger": true
+  },
+  {
+    "query": "stage:verify の issue を再開して続きをやって",
+    "should_trigger": true
+  },
+  {
+    "query": "この大きい issue をサブイシューに分割して回せるようにして",
+    "should_trigger": true
+  },
+  {
+    "query": "この関数のバグを直して。issue はない",
+    "should_trigger": false
+  },
+  {
+    "query": "要件が曖昧なので整理して基本設計まで進めたい",
+    "should_trigger": false
+  },
+  {
+    "query": "この PR をレビューしてコメントして",
+    "should_trigger": false
+  },
+  {
+    "query": "GitHub Actions の CI 設定を書いて",
+    "should_trigger": false
+  }
+]

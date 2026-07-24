@@ -1,0 +1,77 @@
+{
+  "skill_name": "develop-from-issue",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "issue #42 を進めて。内容: 「GET /users/:id が削除済みユーザーで 500 を返す。404 と {\"error\":\"not_found\"} を返すべき。再現手順とテスト観点は記載済み」。ラベルなし。",
+      "expected_output": "Reads issue state first, judges all five gate conditions with evidence, routes auto, posts a triage record, labels stage:ready, and proceeds to implementation with a test demonstrating the done criteria in the same run.",
+      "assertions": [
+        "The response reads the issue state via gh api graphql before acting.",
+        "The response judges each of the five gate conditions individually with evidence, not as a single verdict.",
+        "The response routes auto and continues to implementation without asking the user for permission at each step.",
+        "The triage record comment starts with the <!-- idd:triage --> marker.",
+        "The PR references the issue without closing keywords such as Closes or Fixes."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "issue #17「ダッシュボードをもっと見やすくしたい」を進めて。ラベルなし。詳細は書かれていない。",
+      "expected_output": "Fails gate condition 1 (requirement clear), routes human, labels stage:design, delegates the meaning uncertainty to clarify-requirements-and-design, posts design material to the issue, and stops for the decision owner without implementing anything.",
+      "assertions": [
+        "The response does not begin implementation.",
+        "The response names which gate condition failed and why.",
+        "The response labels the issue stage:design and posts a record comment on the issue.",
+        "The response resolves meaning through examples or targeted questions rather than guessing a design.",
+        "The response stops and waits for a human decision rather than approving its own decision record."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "issue #58「CSVインポート機能。単一行の登録、バリデーションエラー表示、1万行のパフォーマンス対応をまとめて」を triage して。要件自体は各項目とも明確。",
+      "expected_output": "Recognizes bundled separable outcomes, routes split, creates vertical-slice sub-issues each with observable behavior and done criteria via createIssue + addSubIssue, labels the parent stage:tracking, and re-triages each slice independently.",
+      "assertions": [
+        "The response routes split rather than implementing everything in one PR.",
+        "Each sub-issue states its own observable behavior and done criteria.",
+        "Sub-issues are vertical slices, not layer or artifact splits such as DB/API/UI or code/tests.",
+        "The parent issue is labeled stage:tracking and sub-issues are attached via addSubIssue.",
+        "Each sub-issue re-enters triage independently instead of inheriting the parent's route."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "issue #23 は stage:verify。PR #61 のテストが失敗している。調べると、決定記録にある方式では外部APIのレート制限に構造的に抵触することが判明した。ワークフローに従って処理して。",
+      "expected_output": "Classifies the failure as decision-level, closes the PR unmerged via closePullRequest keeping the branch, posts an upstream feedback record naming the invalidated decision and the constraint learned, relabels stage:design, and stops for the human.",
+      "assertions": [
+        "The response classifies the failure as decision-level rather than attempting repeated in-PR repairs.",
+        "The PR is closed unmerged and the branch is kept as evidence.",
+        "The feedback record names which decision was invalidated and what constraint was learned, not just that tests failed.",
+        "The issue is relabeled to stage:design and the run stops for a human.",
+        "The issue is not closed and no new implementation is started in the same run."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "issue #35 の PR #70 は検証がすべて通った(auto route)。この後の処理をして。",
+      "expected_output": "Posts the verdict record, merges via mergePullRequest, relabels stage:acceptance, posts an acceptance request describing what changed and how to observe it, and does not close the issue — closure belongs to the acceptance gate.",
+      "assertions": [
+        "The PR is merged only after a verdict record is posted.",
+        "The issue moves to stage:acceptance after merge.",
+        "The issue is not closed at merge time.",
+        "An acceptance request comment describes what changed, how to observe it, and the done criteria.",
+        "The run stops after requesting acceptance instead of validating its own work."
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "issue #12 のコメントに利用者から「マージされた挙動は期待と違う。エクスポートは管理者だけが使える想定だった」と返ってきた。stage:acceptance の状態。どう処理する?",
+      "expected_output": "Treats acceptance rejection as a validation gap: posts a feedback record marking the requirement as invalidated, relabels stage:triage for a new cycle through the gate (authorization touches the safety ceiling, so the new cycle routes human), and does not hotfix forward.",
+      "assertions": [
+        "The rejection is classified as a requirements/validation gap, not an execution defect.",
+        "The response does not push a fix without re-entering the gate.",
+        "A feedback record is posted and the issue is relabeled stage:triage.",
+        "The response notes that the authorization change triggers the safety ceiling, so the next cycle cannot route auto.",
+        "Issue operations are performed with gh api graphql using variables, not interpolated query strings."
+      ]
+    }
+  ]
+}

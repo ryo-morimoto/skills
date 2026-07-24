@@ -1,0 +1,12 @@
+interface:
+  display_name: "Issue駆動開発ワークフロー"
+  short_description: "GitHub issueを起点に、要求の分類から実装・検証・マージ・受け入れまでを回します"
+  default_prompt: Use $develop-from-issue to drive this GitHub issue through triage,
+    design, implementation, verification, and acceptance.
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

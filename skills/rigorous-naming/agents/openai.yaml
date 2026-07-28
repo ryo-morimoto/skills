@@ -1,0 +1,4 @@
+interface:
+  display_name: "Rigorous Naming"
+  short_description: "Apply rigorous naming to identifiers and domain terms"
+  default_prompt: "Use $rigorous-naming to design and verify every non-trivial name introduced by this change."

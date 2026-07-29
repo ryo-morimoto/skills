@@ -26,6 +26,8 @@ Use a compact comparison when the choice is consequential:
 
 The comparison exists to expose meaning, not to manufacture ceremony. Stop after the decisive difference is visible.
 
+After the choice is made, do not paste this matrix into the final response. Emit **Naming decisions** per [naming-decisions.md](naming-decisions.md) instead—one rejected alternative is enough there.
+
 ## Positive And Negative Examples
 
 - Reject `processData()` when the subject, transition, and outcome are unknown. Prefer `captureAuthorizedPayment()` only when it truthfully describes the precondition and outcome.

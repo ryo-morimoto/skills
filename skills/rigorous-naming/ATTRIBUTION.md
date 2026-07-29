@@ -15,6 +15,9 @@
 - Expanded the scope from code identifiers to APIs, schemas, persistence, configuration, CLI keys, events, telemetry, errors, tests, and documentation terms.
 - Reworked the design signals, examples, escalation rules, and completion evidence; removed the upstream `applesauce`, `probably_`, `_AndStuff`, per-transition commit, and mandatory phase-pause mechanics.
 - Reorganized and rewrote the material for use by Codex agents.
+- Clarified the scope gate as an operational fire condition (non-trivial criteria + exemptions) and set the final **Naming decisions** report threshold equal to that gate.
+- Split ambiguous “review” into **verify** (accept/reject adopted terms) versus **audit** (opportunity inventory).
+- Added a low-cognitive-load **Naming decisions** output contract (`references/naming-decisions.md`) separate from working candidate comparison.
 
 The changes are not endorsed by kawasima or by any upstream contributor.
 

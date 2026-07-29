@@ -46,3 +46,5 @@ After the structural response:
 4. Search for the broad or conflicting term that revealed the problem.
 
 If the new structure still requires an unstable or misleading name, the design issue remains unresolved.
+
+When a design signal remains after naming, mark it once under **Naming decisions** (see [naming-decisions.md](naming-decisions.md)). Do not expand the naming report into a full design review unless the user asks.

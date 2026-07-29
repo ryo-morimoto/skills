@@ -1,4 +1,4 @@
 interface:
   display_name: "Rigorous Naming"
-  short_description: "Apply rigorous naming to identifiers and domain terms"
-  default_prompt: "Use $rigorous-naming to design and verify every non-trivial name introduced by this change."
+  short_description: "Apply rigorous naming; emit scannable Naming decisions"
+  default_prompt: "Use $rigorous-naming to design every non-trivial name this change introduces, and end with a Naming decisions table."

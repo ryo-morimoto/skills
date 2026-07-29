@@ -1,6 +1,6 @@
 ---
 name: rigorous-naming
-description: Apply rigorous naming to non-trivial identifiers and domain vocabulary during implementation, refactoring, review, and verification. Use before work adds, renames, repurposes, translates, abbreviates, broadens, or narrows names in modules, types, functions, fields, APIs, schemas, configuration or CLI keys, events, telemetry, errors, tests, or documentation, even when naming is incidental to a larger task. Use audit mode only for explicit report-only requests. Skip generated or vendored code, mechanically prescribed names, established terms of art, and conventional tiny-scope locals.
+description: Apply rigorous naming to non-trivial identifiers and domain vocabulary during implementation, refactoring, improve, audit, and verification. Use before work adds, renames, repurposes, translates, abbreviates, broadens, or narrows names in modules, types, functions, fields, APIs, schemas, configuration or CLI keys, events, telemetry, errors, tests, or documentation—even when naming is incidental. Use verify mode when the user asks only to check adopted or proposed terms. Use audit mode only for improvement inventories without mutation. Skip generated or vendored code, mechanically prescribed names, established terms of art, and conventional tiny-scope locals.
 ---
 
 # Rigorous Naming
@@ -11,21 +11,44 @@ Treat names as design decisions, domain-model decisions, and contracts with read
 
 Default to **embedded mode** during implementation. Make the naming decision inside the authorized task and continue the implementation. Do not turn ordinary implementation into an advisory report or ask for approval for a reversible local/private name.
 
+When the [scope gate](#apply-the-scope-gate) requires the full workflow for any term, the task is incomplete until **Naming decisions** is emitted in the final response. That display threshold is identical to the scope gate—not a separate, softer rule.
+
 ## Select The Mode
 
 | Request | Mode | Behavior |
 |---|---|---|
-| A feature, fix, refactor, schema change, or documentation change introduces or changes names | **Embedded** | Run the workflow, implement the chosen vocabulary, and verify propagation |
-| The user asks to improve one or more specific existing names | **Improve** | Diagnose the current meaning, compare replacements, and implement changes within the authorized scope |
-| The user explicitly asks for a naming audit, review, candidate list, or report only | **Audit** | Report findings without editing |
+| A feature, fix, refactor, schema change, or documentation change introduces or changes names | **Embedded** | Run the workflow, implement the chosen vocabulary, verify propagation, emit Naming decisions |
+| The user asks to improve one or more specific existing names | **Improve** | Diagnose the current meaning, compare replacements, implement within scope, emit Naming decisions |
+| The user asks only to check whether adopted or proposed terms are sound | **Verify** | Rebuild definitions and use-site evidence for the named scope; emit Naming decisions with Status; do not edit unless asked |
+| The user asks for a naming audit, opportunity list, candidate inventory, or smell scan without applying changes | **Audit** | Report problems and next decisions only; do not emit Naming decisions as if terms were adopted |
 
-When the request is ambiguous, use embedded mode if it authorizes a change; use audit mode only when it clearly asks for analysis without mutation.
+Disambiguation:
+
+- **Verify** = “are these chosen terms acceptable?” (decision check).
+- **Audit** = “what naming problems exist in this scope?” (opportunity inventory).
+- Phrases such as “naming review” alone are ambiguous: if the user points at specific terms or “adopted / selected / 採用” language, use **verify**; if they ask what is wrong or what could improve, use **audit**; if they authorize fixes, use **improve**.
+
+When the request is still ambiguous, use embedded mode if it authorizes a change; otherwise ask which of verify or audit they want—do not guess mutation.
 
 ## Apply The Scope Gate
 
-Run the full workflow for a non-trivial name that can carry meaning beyond one obvious expression or tiny local scope. Include domain terms and names exposed through code, tests, APIs, schemas, persistence, configuration, CLI surfaces, events, telemetry, errors, and documentation.
+### Fire The Full Workflow When
 
-Do not require candidate comparison for:
+All of the following hold for a name:
+
+1. **Mutation or check intent:** the task introduces, renames, repurposes, translates, abbreviates, broadens, narrows, or—under verify—re-checks the term.
+2. **Not exempt** under [Exemptions](#exemptions).
+3. **Non-trivial:** at least one of:
+   - the name is or will be **shared** or **public** vocabulary (see surface classes below);
+   - a **semantic choice** exists (two serious candidates, or a new term vs an existing adjacent term);
+   - the name is a **domain term** (ubiquitous-language candidate) used in product, ops, or model speech;
+   - the same spelling will be read **outside one obvious expression or tiny local scope** (other functions, modules, tests, docs, or configs).
+
+If the full workflow fires for one or more terms, emit **Naming decisions** for exactly those terms. Do not emit rows for exempt names.
+
+### Exemptions
+
+Do not require candidate comparison or Naming decisions rows for:
 
 - generated or vendored code;
 - names prescribed by a language, framework, protocol, or external standard;
@@ -55,11 +78,11 @@ If the sentence cannot be completed, investigate the domain and responsibility b
 
 Classify the name before changing it:
 
-- **Local/private:** reversible implementation detail.
-- **Shared vocabulary:** repository-wide or bounded-context language used by multiple components or documents.
-- **Public/persisted:** API, schema, wire format, event, CLI, configuration, telemetry, serialized data, database, or another externally consumed contract.
+- **local:** reversible implementation detail.
+- **shared:** repository-wide or bounded-context language used by multiple components or documents.
+- **public:** API, schema, wire format, event, CLI, configuration, telemetry, serialized data, database, or another externally consumed contract.
 
-Treat public/persisted renames as compatibility and migration work, even when the surface is labeled experimental.
+Treat public renames as compatibility and migration work, even when the surface is labeled experimental.
 
 ### 4. Choose Concepts Before Words
 
@@ -79,7 +102,7 @@ For a genuine non-trivial choice, compare at least two serious candidates. Place
 
 Reject a candidate that is truthful only at the declaration but misleading where readers use it. Prefer precision and honesty before brevity. Let the receiver, module, and type supply context instead of repeating it.
 
-Read [references/calibration.md](references/calibration.md) when candidates remain close, when auditing, or when evaluating this skill.
+Read [references/calibration.md](references/calibration.md) when candidates remain close, when auditing, or when evaluating this skill. The calibration comparison is a **working** tool for choosing; it is not the final report.
 
 ### 6. Treat Naming Difficulty As Design Evidence
 
@@ -100,9 +123,11 @@ Read [references/design-signals.md](references/design-signals.md) when a signal 
 
 Choose the candidate that best matches the definition and reads naturally at use sites. Then propagate the canonical term through every affected code, test, API, schema, persistence, configuration, CLI, event, telemetry, error, and documentation surface.
 
-For local/private decisions, proceed without waiting. For shared vocabulary, update an existing glossary or domain document when the repository has one. Do not create a glossary solely to record one obvious term.
+For local decisions, proceed without waiting. For shared vocabulary, update an existing glossary or domain document when the repository has one. Do not create a glossary solely to record one obvious term.
 
-For public/persisted changes, identify consumers and establish the safe path: preserve the current name, add a compatible alias, deprecate it, version the contract, or migrate consumers and stored data. Ask before proceeding only when the required compatibility strategy is not already authorized or discoverable.
+For public changes, identify consumers and establish the safe path: preserve the current name, add a compatible alias, deprecate it, version the contract, or migrate consumers and stored data. Ask before proceeding only when the required compatibility strategy is not already authorized or discoverable.
+
+In verify mode, skip implementation unless the user asks to apply fixes.
 
 ### 8. Verify The Vocabulary
 
@@ -116,11 +141,26 @@ Search again for:
 
 Run the relevant tests and compatibility checks. A passing test suite does not by itself prove that the vocabulary is coherent.
 
+### 9. Emit Naming Decisions
+
+In the final response, report every in-scope non-exempt term using the contract in [references/naming-decisions.md](references/naming-decisions.md).
+
+Rules that keep cognitive load low:
+
+- one table (or one single-term card) for all terms; public rows first, then shared, then local;
+- required columns: Id (`n1`, `n2`, …), Term, Definition, Use site, Rejected (why), Surface, Compat;
+- assign Id after sort, starting at `n1` in each block, so the user can type short references (`n2が微妙`);
+- in verify mode, add Status (`OK` / `RISK` / `REJECT`);
+- ban process narrative, search logs, file dumps, and dual prose restatement of the table;
+- omit exempt names entirely.
+
+Place the block where a reviewer will see it without mining the transcript—normally at the end of the final response, or as the whole response in verify mode.
+
 ## Handle Audit Mode
 
 Audit only the scope the user names. Report each consequential issue with the current term, observed meaning, evidence from use sites, conceptual conflict, affected surface, and recommended next decision. Include safe counterexamples so the report does not become a blanket style critique.
 
-Do not edit in audit mode. If the user later asks to apply a finding, switch to improve mode for that scope without repeating the full audit.
+Do not edit in audit mode. Do not present audit findings as Naming decisions. If the user later asks to apply a finding, switch to improve mode for that scope without repeating the full audit.
 
 ## Escalate Only At Contract Boundaries
 
@@ -128,23 +168,26 @@ Ask the user only when:
 
 - the domain evidence supports multiple materially different definitions;
 - the change would merge or split established concepts;
-- a public/persisted rename lacks an authorized compatibility strategy;
+- a public rename lacks an authorized compatibility strategy;
 - resolving the name requires an API, schema, permission-boundary, or other structural expansion outside the task.
 
 Present the competing definitions, strongest candidates, consequential difference, and migration impact. Do not ask the user to choose between names without this evidence.
 
+If a Naming decisions row cannot be completed (no definition, no use site, or unresolved public compat), that is an open decision—not a finished adoption.
+
 ## Definition Of Done
 
-Do not finish a task that introduces or changes a non-trivial term until:
+Do not finish a task that fires the scope gate until:
 
 - the selected term has a one-sentence definition with context and exclusions;
-- an important alternative has been compared and rejected for a concrete reason;
+- an important alternative has been compared and rejected for a concrete reason (when a genuine choice existed);
 - representative declarations and use sites have been inspected;
-- the selected term has been propagated across affected surfaces;
+- the selected term has been propagated across affected surfaces (embedded and improve modes);
 - stale and competing terms have been searched again;
-- compatibility impact has been handled or explicitly reported.
+- compatibility impact has been handled or explicitly reported;
+- **Naming decisions** has been emitted for every in-scope non-exempt term per [references/naming-decisions.md](references/naming-decisions.md).
 
-In the final response, report the selected term and definition, rejected alternative and reason, searched or updated surfaces, and compatibility impact. Omit this bookkeeping for exempt tiny-scope or mechanically prescribed names.
+Omit Naming decisions only when the scope gate does not fire (every name is exempt or no naming work occurred).
 
 ## License And Attribution
 

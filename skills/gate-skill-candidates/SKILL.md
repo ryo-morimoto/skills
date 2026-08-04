@@ -39,7 +39,7 @@ Every dial is pass/fail with a mandatory one-line evidence entry. An unevidenced
 
 Two failure modes end the evaluation early:
 
-- **Unfalsifiable candidate.** Attempt the three false-trigger utterances visibly—write the actual utterances, or the explicit argument that every ordinary request would trigger the skill. An unstated attempt does not count. If three cannot be produced, reject skillhood outright: an unfalsifiable description always over-fires.
+- **Unfalsifiable candidate.** Attempt the three false-trigger utterances visibly—write the actual utterances, or the explicit argument that every ordinary request would trigger the skill. An unstated attempt does not count. If three cannot be produced, reject skillhood outright: an unfalsifiable description always over-fires. An unfalsifiable rule stays unfalsifiable in project-memory or anywhere else—do not draft it into memory lines; route to no-build unless a falsifiable reformulation exists, and draft that reformulation instead.
 - **Skill that would never fire.** Models consult skills only for work they cannot easily do alone; a simple one-step wish or an always-on rule of conduct will not trigger a skill however well the description matches. Route such content to project-memory (guaranteed ambient application) or merge, and say why.
 
 Do not soften a failed dial into a "partial pass".
@@ -61,7 +61,7 @@ Do not average dials into an overall score; the verdict is the routing that the 
 
 Two reply shapes. Pick by how much scoring actually happened, not by ceremony.
 
-**Compact verdict** — for advisory questions and any early-exit rejection. Three elements in plain prose, nothing more: the verdict; the deciding evidence in one or two sentences; the concrete next action with its content already drafted (the memory lines, the merge destination, the reframed candidate). No dial scorecard, no routing table, no inventory narration, no framework vocabulary beyond the verdict. Match the length of a direct expert answer.
+**Compact verdict** — for advisory questions and any early-exit rejection. Three elements in plain prose, nothing more: the verdict; the deciding evidence in one or two sentences; the concrete next action with its content already drafted (the memory lines, the merge destination, the reframed candidate). State the verdict decisively: when a part is skill-viable, say so outright—do not hedge an admission into "maybe later". No dial scorecard, no routing table, no inventory narration, no framework vocabulary beyond the verdict. Match the length of a direct expert answer.
 
 **Full format** — for build orders that reach full five-dial scoring, audit mode, a contested verdict, or when the user asks to see the working. Emit both tables, per part when split:
 

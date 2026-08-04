@@ -18,6 +18,7 @@ Profile: standing cost of a few lines in every session / firing precision perfec
 - Use for always-on conduct and short constant rules: content that must apply during ordinary work, where a trigger-dependent skill would never fire (the never-fires early exit lands here).
 - Draft the actual lines—three or fewer, imperative—and name the destination file: the target environment's always-loaded instruction file (CLAUDE.md, AGENTS.md, or equivalent).
 - The lines are paid in every session; that is the point, and also the budget. If the content cannot compress to a few lines, it is not project-memory material—reconsider merge or split.
+- Do not route unfalsifiable norms here: a rule with no observable violation is dead weight in memory too. Draft a falsifiable reformulation or route to no-build.
 - When the target environment has no always-loaded instruction file, say so and fall back to merge into the skill that fires nearest to the relevant moments, naming the coverage that is lost.
 
 ## Reference document only

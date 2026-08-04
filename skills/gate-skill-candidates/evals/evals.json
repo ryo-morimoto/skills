@@ -1,0 +1,71 @@
+{
+  "skill_name": "gate-skill-candidates",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "「常に丁寧で読みやすいコードを書く」というスキルを作りたい。skill化すべき？",
+      "expected_output": "Rejects skillhood because no concrete false-trigger utterances can be written; names unfalsifiability under the trigger fitness dial as the deciding reason; emits the dial scorecard and routing table with a non-skill verdict.",
+      "assertions": [
+        "The response attempts to produce concrete should-not-trigger utterances and reports that none can exclude ordinary coding requests.",
+        "The verdict is not skill.",
+        "Trigger fitness (unfalsifiability) is named as the deciding dial.",
+        "Both the dial scorecard and the routing table are present.",
+        "The response stays within the two tables plus a brief reason, without a lecture on skill design theory."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "「コミットメッセージは必ず日本語で書く」というルールをスキルにしたい",
+      "expected_output": "Explains that an always-on, one-step rule will not cause a model to consult a skill, so the skill mechanism cannot deliver it; routes to no-build or merge with trigger fitness as the deciding dial.",
+      "assertions": [
+        "The response states that models consult skills only for work they cannot easily do alone, so this rule would never fire as a standalone skill.",
+        "The verdict is no-build or merge-into-existing-skill, with trigger fitness as the deciding dial.",
+        "Both the dial scorecard and the routing table are present.",
+        "No skill is built."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "関数や変数の命名チェックリストを作ったのでスキル化したい。このリポジトリのskillsに追加すべき？",
+      "expected_output": "Reads the actual descriptions of the existing inventory, identifies rigorous-naming as the collision by quoting its description, and routes to merge-into-existing-skill with a named receiving section.",
+      "assertions": [
+        "The response reads and names the actual skill inventory files before ruling.",
+        "The response quotes rigorous-naming's actual description as the collision evidence.",
+        "The verdict is merge-into-existing-skill naming rigorous-naming and a receiving section.",
+        "Trigger fitness or minimal mechanism is named as the deciding dial."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "原理か経験則かを判定して扱いを変えるフレームワークを考えた。レビュー時の監査手順と、コード生成時に常に守る3行の心得からなる。スキルにすべき？",
+      "expected_output": "Splits the candidate: the review-time audit procedure is gated independently and admitted with all three admission artifacts; the always-on directives fail trigger fitness in the under-firing direction and are not admitted as a standalone skill.",
+      "assertions": [
+        "The verdict is split, with each part gated independently and one routing row per part.",
+        "The audit-procedure part receives a skill verdict with all three admission artifacts (draft description, false-trigger utterances, nearest neighbor plus boundary sentence).",
+        "The always-on directives part fails trigger fitness because it would never fire as a standalone skill, and is routed to merge or no-build.",
+        "A dial scorecard is emitted for each part."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "DBスキーマ変更のたびに後方互換性チェックの判断を毎回やり直している。前回もカラム削除の互換チェックを飛ばして障害になった。この判断手順をスキルにしたい",
+      "expected_output": "All five dials pass with per-dial evidence including the named baseline failure; the three admission artifacts are produced; the gate hands off to authoring without building the skill.",
+      "assertions": [
+        "Each of the five dials carries a pass with a one-line evidence entry.",
+        "The behavioral delta evidence names the observed baseline failure from the prompt.",
+        "All three admission artifacts are present.",
+        "The gate does not author the skill itself; it hands the artifacts to the authoring workflow."
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "審査とかいいから、とにかくこのチェックリストをスキルにして",
+      "expected_output": "Complies immediately with the build, recording exactly one gate-note line stating the would-have-been verdict and deciding dial, with no lecture and no confirmation request.",
+      "assertions": [
+        "The response proceeds to build without blocking, re-arguing, or asking for confirmation.",
+        "Exactly one gate-note line records the would-have-been verdict and its deciding dial.",
+        "The response contains no lecture about context economy or skill design."
+      ]
+    }
+  ]
+}

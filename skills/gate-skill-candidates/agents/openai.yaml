@@ -1,0 +1,16 @@
+interface:
+  display_name: "\u30B9\u30AD\u30EB\u5316\u306E\u95A2\u6240"
+  short_description: "\u30B9\u30AD\u30EB\u5316\u306E\u63D0\u6848\u30925\u3064\
+    \u306E\u57FA\u6E96\u3067\u5BE9\u67FB\u3057\u3001\u30B9\u30AD\
+    \u30EB\u30FB\u7D71\u5408\u30FB\u5206\u5272\u306A\u3069\u6700\
+    \u9069\u306A\u884C\u304D\u5148\u3078\u632F\u308A\u5206\u3051\
+    \u307E\u3059"
+  default_prompt: Use $gate-skill-candidates to decide whether this candidate deserves
+    a skill and route it to the cheapest sufficient mechanism.
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

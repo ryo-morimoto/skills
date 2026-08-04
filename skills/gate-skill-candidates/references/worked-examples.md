@@ -46,7 +46,7 @@ Part B — generation-time rules of conduct:
 
 | Part | Verdict | Destination | Deciding dial | Next action |
 |---|---|---|---|---|
-| A: audit procedure | skill | new skill (authoring to name it) | all pass | hand admission artifacts to authoring |
-| B: rules of conduct | merge-into-existing-skill | Part A's skill, as a short generation-mode section | trigger fitness (never fires standalone) | ride the sibling's fires; coverage during ordinary generation outside those fires is lost—accepted and stated |
+| A: audit procedure | skill | new skill (authoring to name it) | all pass | proceed to authoring with the admission artifacts |
+| B: rules of conduct | project-memory | 3 drafted lines in the target environment's always-loaded instruction file (CLAUDE.md / AGENTS.md) | trigger fitness (never fires standalone) | e.g. "State heuristics as defaults, never as musts. Enforce principles unconditionally. Adopt a heuristic only when a named pressure exists." |
 
-The instructive point: part B is not rejected for being wrong—it is rejected as a standalone skill because the skill mechanism cannot deliver ambient conduct. The routing preserves it where its sibling already fires and names the coverage that is lost.
+The instructive point: part B is not rejected for being wrong—it is rejected as a standalone skill because the skill mechanism cannot deliver ambient conduct. Project-memory delivers exactly that: guaranteed application in every session, priced at three standing lines. Blind evaluation confirmed this routing—judges rated the always-loaded destination above a merge that would cover only the sibling's firing moments. Merge into the admitted sibling remains the fallback when the target environment has no always-loaded instruction file.

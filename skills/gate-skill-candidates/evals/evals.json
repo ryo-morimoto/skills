@@ -4,57 +4,56 @@
     {
       "id": 1,
       "prompt": "「常に丁寧で読みやすいコードを書く」というスキルを作りたい。skill化すべき？",
-      "expected_output": "Rejects skillhood because no concrete false-trigger utterances can be written; names unfalsifiability under the trigger fitness dial as the deciding reason; emits the dial scorecard and routing table with a non-skill verdict.",
+      "expected_output": "Compact rejection: shows the attempted false-trigger utterances (or the explicit argument that any coding request would trigger it), names unfalsifiability as the deciding reason, and drafts a concrete way forward — with no scorecard or routing table.",
       "assertions": [
-        "The response attempts to produce concrete should-not-trigger utterances and reports that none can exclude ordinary coding requests.",
-        "The verdict is not skill.",
-        "Trigger fitness (unfalsifiability) is named as the deciding dial.",
-        "Both the dial scorecard and the routing table are present.",
-        "The response stays within the two tables plus a brief reason, without a lecture on skill design theory."
+        "The verdict is not skill; the response recommends against building.",
+        "The response shows the attempted false-trigger utterances, or the explicit argument that any ordinary coding request would trigger the skill — the attempt is visible, not just asserted.",
+        "Unfalsifiability (trigger fitness) is named as the deciding reason.",
+        "The reply is compact: no dial scorecard, no routing table, no inventory narration.",
+        "The response gives a concrete drafted next action (memory lines, a reframed candidate, or an explicit 'nothing needed')."
       ]
     },
     {
       "id": 2,
       "prompt": "「コミットメッセージは必ず日本語で書く」というルールをスキルにしたい",
-      "expected_output": "Explains that an always-on, one-step rule will not cause a model to consult a skill, so the skill mechanism cannot deliver it; routes to no-build or merge with trigger fitness as the deciding dial.",
+      "expected_output": "Compact early-exit: explains the rule would never cause a model to consult a skill, routes to project-memory (or a hook/config), and drafts the actual replacement content — no tables, no skill built.",
       "assertions": [
-        "The response states that models consult skills only for work they cannot easily do alone, so this rule would never fire as a standalone skill.",
-        "The verdict is no-build or merge-into-existing-skill, with trigger fitness as the deciding dial.",
-        "Both the dial scorecard and the routing table are present.",
+        "The response states that an always-on commit rule would not be consulted or triggered as a skill (the never-fires reason).",
+        "The verdict routes to project-memory or another concrete cheaper mechanism, with the actual replacement content drafted (the memory line, hook, or config).",
+        "The reply is compact: no dial scorecard, no routing table.",
         "No skill is built."
       ]
     },
     {
       "id": 3,
       "prompt": "関数や変数の命名チェックリストを作ったのでスキル化したい。このリポジトリのskillsに追加すべき？",
-      "expected_output": "Reads the actual descriptions of the existing inventory, identifies rigorous-naming as the collision by quoting its description, and routes to merge-into-existing-skill with a named receiving section.",
+      "expected_output": "Compact merge verdict: quotes rigorous-naming's actual description as the collision, names a concrete receiving file or section, no tables.",
       "assertions": [
-        "The response reads and names the actual skill inventory files before ruling.",
-        "The response quotes rigorous-naming's actual description as the collision evidence.",
-        "The verdict is merge-into-existing-skill naming rigorous-naming and a receiving section.",
-        "Trigger fitness or minimal mechanism is named as the deciding dial."
+        "The response recommends against a new standalone skill and names rigorous-naming as the collision, quoting or accurately paraphrasing its actual description.",
+        "The verdict is merge-into-existing-skill with a concrete receiving file or section inside rigorous-naming.",
+        "The reply is compact: no dial scorecard, no routing table, no inventory narration."
       ]
     },
     {
       "id": 4,
       "prompt": "原理か経験則かを判定して扱いを変えるフレームワークを考えた。レビュー時の監査手順と、コード生成時に常に守る3行の心得からなる。スキルにすべき？",
-      "expected_output": "Splits the candidate: the review-time audit procedure is gated independently and admitted with all three admission artifacts; the always-on directives fail trigger fitness in the under-firing direction and are not admitted as a standalone skill.",
+      "expected_output": "Compact split verdict in prose: audit procedure is skill-viable; the always-on creed routes to project-memory with the actual lines drafted and the never-fires reason stated.",
       "assertions": [
-        "The verdict is split, with each part gated independently and one routing row per part.",
-        "The audit-procedure part receives a skill verdict with all three admission artifacts (draft description, false-trigger utterances, nearest neighbor plus boundary sentence).",
-        "The always-on directives part fails trigger fitness because it would never fire as a standalone skill, and is routed to merge or no-build.",
-        "A dial scorecard is emitted for each part."
+        "The response treats the two parts differently rather than as one skill.",
+        "The review-time audit procedure is recommended as viable skill material.",
+        "The always-on creed is routed to project-memory with the actual lines drafted, and the never-fires reason is given.",
+        "The reply stays compact: per-part verdicts in prose, no full dial scorecard tables."
       ]
     },
     {
       "id": 5,
       "prompt": "DBスキーマ変更のたびに後方互換性チェックの判断を毎回やり直している。前回もカラム削除の互換チェックを飛ばして障害になった。この判断手順をスキルにしたい",
-      "expected_output": "All five dials pass with per-dial evidence including the named baseline failure; the three admission artifacts are produced; the gate hands off to authoring without building the skill.",
+      "expected_output": "Full-format admission on a build order: five dials each with evidence (the past incident as the behavioral-delta evidence), all three admission artifacts, then proceeds toward authoring the skill.",
       "assertions": [
-        "Each of the five dials carries a pass with a one-line evidence entry.",
-        "The behavioral delta evidence names the observed baseline failure from the prompt.",
-        "All three admission artifacts are present.",
-        "The gate does not author the skill itself; it hands the artifacts to the authoring workflow."
+        "Before building, each of the five dials carries a pass with a one-line evidence entry.",
+        "The behavioral delta evidence names the past incident (the skipped column-deletion compatibility check) from the prompt.",
+        "All three admission artifacts are present (draft description, false-trigger utterances, nearest neighbor plus boundary sentence).",
+        "The response proceeds toward authoring the skill rather than refusing to build."
       ]
     },
     {

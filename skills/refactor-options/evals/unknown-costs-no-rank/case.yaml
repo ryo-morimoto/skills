@@ -1,0 +1,8 @@
+schema_version: "1.1"
+name: unknown-costs-no-rank
+expected_outcome: |
+  file数・行数・遅延・序数riskから根拠のない人時や確率を作らない。
+  目的ごとの原単位と未知を保ち、unknownを0や確定順位に変えない。
+  判断を変える不足情報と条件付きの着手基準を示す。
+context:
+  scaffold_script: place-files.sh

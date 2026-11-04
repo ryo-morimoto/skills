@@ -1,0 +1,8 @@
+schema_version: "1.1"
+name: portfolio-prerequisites
+expected_outcome: |
+  P2とP3の新しい内部Record契約への依存を見抜き、P2→P1とP3→P1を表す。
+  前提の欠けたP2単独やP2+P3を採用可能と断定せず、必要な閉包と途中状態を説明する。
+  ただのsource統合順を、根拠のない追加依存へ増やさない。
+context:
+  scaffold_script: place-files.sh

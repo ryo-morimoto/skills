@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0",
+  "context": {
+    "schema_version": "1.0", "run_id": "synthetic-example", "context_revision": 1,
+    "objective": "Reduce repeat change effort while preserving caller contracts.",
+    "success_scenarios": ["A representative rule change needs fewer person-hours."],
+    "scope": ["Synthetic rule boundary"], "non_goals": ["Implementing any option"],
+    "invariants": ["Existing caller behavior is preserved."],
+    "snapshot": {"revision": "synthetic-not-a-real-repository-snapshot", "dirty": false, "files": []},
+    "horizon_months": 12, "horizon_reason": "Synthetic one-year comparison, not a user-approved real project horizon.",
+    "constraints": [{"id": "G1", "statement": "Preserve caller contracts."}],
+    "evidence": [{"id": "E1", "kind": "assumption", "source": "Synthetic arithmetic fixture; no real agent execution or code inspection.", "supports": "Example estimates and recorded traces only.", "limitation": "Not empirical evidence, execution proof, or a sandbox/parallelism verification."}],
+    "assumptions": [{"id": "A1", "statement": "Constant monthly savings after completion; independent cost components, no double-counting. All figures synthetic."}],
+    "unknowns": [{"id": "U1", "statement": "Actual future incident likelihood is not measured.", "decision_effect": "Do not infer overall safety from the cost/capacity figures."}],
+    "preferences": ["No automatic selection."]
+  },
+  "baseline": {
+    "id": "P0", "strategy_id": "baseline", "plan_revision": 1, "context_revision": 1, "status": "viable",
+    "name": "Keep the current structure", "strategy": "No migration.", "difference": "Reference for delta values, not zero absolute maintenance.",
+    "before": "Callers depend directly on rule internals.", "after": "Unchanged; recurring maintenance continues.",
+    "scope": ["Existing rule boundary"], "non_goals": ["No restructuring"], "caller_example": "caller -> existingRule(input), unchanged",
+    "steps": [], "verification": ["Continue current regression checks; not executed by this skill."],
+    "recovery": {"approach": "Use existing operational recovery procedure; effectiveness unverified.", "irreversible": ["Existing data loss remains possible."], "hours": {"unit": "person_hour", "low": null, "reference": null, "high": null, "basis": "No recovery measurements.", "evidence_ids": [], "assumption_ids": [], "reason": "Existing operational recovery effort is unknown."}},
+    "remaining_debt": ["Recurring maintenance and coupling remain; delta zero is not absolute zero."],
+    "evidence_ids": ["E1"], "assumption_ids": ["A1"], "unknown_ids": ["U1"],
+    "costs": [{"id": "C0", "label": "No change: incremental migration cost only", "hours": {"unit": "person_hour", "low": 0, "reference": 0, "high": 0, "basis": "No migration, not zero ongoing maintenance.", "evidence_ids": [], "assumption_ids": ["A1"], "reason": ""}}],
+    "monthly_savings_hours": {"unit": "person_hour/month", "low": 0, "reference": 0, "high": 0, "basis": "Delta from current maintenance baseline.", "evidence_ids": [], "assumption_ids": ["A1"], "reason": ""},
+    "completion_months": {"unit": "month", "low": 0, "reference": 0, "high": 0, "basis": "No migration.", "evidence_ids": [], "assumption_ids": ["A1"], "reason": ""},
+    "gates": [{"constraint_id": "G1", "status": "pass", "reason": "No structural change in this synthetic baseline.", "evidence_ids": ["E1"]}],
+    "risks": [{"id": "R0", "event": "Existing coupling may propagate a rule regression.", "phase": "steady", "detection": "Current regression monitoring.", "mitigation": "Continue existing review checks.", "residual_severity": null, "severity_reason": "Existing impact is not measured.", "recovery_hours": {"unit": "person_hour", "low": null, "reference": null, "high": null, "basis": "No observed recovery data.", "evidence_ids": [], "assumption_ids": [], "reason": "Unknown existing recovery effort."}, "likelihood": "Unknown; no measured frequency.", "evidence_ids": ["E1"]}]
+  },
+  "plans": [
+    {
+      "id": "A", "strategy_id": "boundary", "plan_revision": 1, "context_revision": 1, "status": "viable",
+      "name": "Introduce a narrow boundary", "strategy": "Hide rule internals behind a stable facade.", "difference": "Keep the implementation and isolate callers.",
+      "before": "Callers depend directly on rule internals.", "after": "Callers use a stable facade; internals remain coupled.",
+      "scope": ["Facade and callers"], "non_goals": ["Replace the rule engine"], "caller_example": "caller -> facade.evaluate(input), same observable result",
+      "steps": [{"id": "S1", "description": "Specify the existing caller contract.", "depends_on": [], "files": ["synthetic/contracts.py"], "acceptance": "Characterization cases cover existing behavior."}, {"id": "S2", "description": "Plan facade introduction and caller migration.", "depends_on": ["S1"], "files": ["synthetic/facade.py"], "acceptance": "Every caller retains the specified behavior in the proposed verification plan."}],
+      "verification": ["Proposed characterization and caller parity tests; not executed."],
+      "recovery": {"approach": "Restore callers to original entry point; keep old path until parity verified.", "irreversible": ["None proposed; recovery still requires validation."], "hours": {"unit": "person_hour", "low": 2, "reference": 4, "high": 8, "basis": "Synthetic restoration scenario.", "evidence_ids": [], "assumption_ids": ["A1"], "reason": ""}},
+      "remaining_debt": ["Internal rule coupling remains."], "evidence_ids": ["E1"], "assumption_ids": ["A1"], "unknown_ids": ["U1"],
+      "costs": [{"id": "CA", "label": "All synthetic migration work (independent component)", "hours": {"unit": "person_hour", "low": 48, "reference": 64, "high": 80, "basis": "Synthetic inclusive effort, no recovery double-counted.", "evidence_ids": [], "assumption_ids": ["A1"], "reason": ""}}],
+      "monthly_savings_hours": {"unit": "person_hour/month", "low": 8, "reference": 12, "high": 16, "basis": "Synthetic change-frequency savings, not cash.", "evidence_ids": [], "assumption_ids": ["A1"], "reason": ""},
+      "completion_months": {"unit": "month", "low": 1, "reference": 1, "high": 1, "basis": "Synthetic elapsed duration, not labor hours.", "evidence_ids": [], "assumption_ids": ["A1"], "reason": ""},
+      "gates": [{"constraint_id": "G1", "status": "pass", "reason": "Synthetic design-level contract assessment only, not executed tests.", "evidence_ids": ["E1"]}],
+      "risks": [{"id": "RA", "event": "Facade mapping mismatch breaks some caller behavior.", "phase": "migration", "detection": "Proposed parity checks.", "mitigation": "Retain old entry point for restoration.", "residual_severity": 3, "severity_reason": "Synthetic reversible caller-visible failure; ordinal anchor 3.", "recovery_hours": {"unit": "person_hour", "low": 2, "reference": 4, "high": 8, "basis": "Synthetic restoration scenario.", "evidence_ids": [], "assumption_ids": ["A1"], "reason": ""}, "likelihood": "Unknown; no measured frequency.", "evidence_ids": ["E1"]}]
+    },
+    {
+      "id": "B", "strategy_id": "replace-engine", "plan_revision": 1, "context_revision": 1, "status": "viable",
+      "name": "Replace the internal rule representation", "strategy": "Use a declarative rule model with a compatibility adapter.", "difference": "Change internal extension model rather than only hiding the current engine.",
+      "before": "Callers depend directly on rule internals.", "after": "Declarative engine behind compatibility adapter.",
+      "scope": ["Engine, adapter, callers and legacy retirement"], "non_goals": ["Change external behavior"], "caller_example": "caller -> adapter.evaluate(input) -> declarative engine, same observable result",
+      "steps": [{"id": "S1", "description": "Specify compatibility contract and recovery checkpoints.", "depends_on": [], "files": ["synthetic/contracts.py"], "acceptance": "Legacy behavior and recovery checkpoints documented."}, {"id": "S2", "description": "Plan new model and adapter, coexistence, then legacy retirement.", "depends_on": ["S1"], "files": ["synthetic/model.py", "synthetic/adapter.py"], "acceptance": "Proposed parity verification covers coexistence and retirement."}],
+      "verification": ["Proposed parity, migration and rollback rehearsal checks; not executed."],
+      "recovery": {"approach": "Restore legacy routing while retaining legacy representation; retirement is gated on parity and recovery checks.", "irreversible": ["Legacy retirement may prevent simple rollback; delay retirement until explicit approval."], "hours": {"unit": "person_hour", "low": 8, "reference": 16, "high": 32, "basis": "Synthetic adapter restoration effort.", "evidence_ids": [], "assumption_ids": ["A1"], "reason": ""}},
+      "remaining_debt": ["Compatibility adapter remains until callers migrate."], "evidence_ids": ["E1"], "assumption_ids": ["A1"], "unknown_ids": ["U1"],
+      "costs": [{"id": "CB", "label": "All synthetic migration work (independent component)", "hours": {"unit": "person_hour", "low": 120, "reference": 160, "high": 240, "basis": "Synthetic inclusive effort, no recovery double-counted.", "evidence_ids": [], "assumption_ids": ["A1"], "reason": ""}}],
+      "monthly_savings_hours": {"unit": "person_hour/month", "low": 16, "reference": 24, "high": 32, "basis": "Synthetic recurring savings, not cash.", "evidence_ids": [], "assumption_ids": ["A1"], "reason": ""},
+      "completion_months": {"unit": "month", "low": 3, "reference": 3, "high": 3, "basis": "Synthetic elapsed duration, not labor hours.", "evidence_ids": [], "assumption_ids": ["A1"], "reason": ""},
+      "gates": [{"constraint_id": "G1", "status": "pass", "reason": "Synthetic design-level contract assessment only, not executed tests.", "evidence_ids": ["E1"]}],
+      "risks": [{"id": "RB", "event": "Semantic migration mismatch propagates across rule consumers.", "phase": "migration", "detection": "Proposed parity and recovery checks.", "mitigation": "Keep legacy routing and delay retirement.", "residual_severity": 4, "severity_reason": "Synthetic cross-domain failure; ordinal anchor 4, not twice severity 2.", "recovery_hours": {"unit": "person_hour", "low": 8, "reference": 16, "high": 32, "basis": "Synthetic adapter restoration effort.", "evidence_ids": [], "assumption_ids": ["A1"], "reason": ""}, "likelihood": "Unknown; no measured frequency.", "evidence_ids": ["E1"]}]
+    }
+  ],
+  "critique": {"context_revision": 1, "reviewed_plans": [{"plan_id": "P0", "plan_revision": 1}, {"plan_id": "A", "plan_revision": 1}, {"plan_id": "B", "plan_revision": 1}], "findings": [{"id": "F1", "plan_id": null, "severity": "minor", "issue": "All estimates and execution records are synthetic; no empirical claims are supported.", "evidence_ids": ["E1"], "fix": "Collect actual authorized evidence before a real decision."}], "disagreements": ["No real critic or planner was executed to produce this fixture."]},
+  "recommendation": {"plan_id": null, "reason": "A reference capacity is higher at H=12; B is higher at H=14. This does not resolve unmodelled risk or user preferences.", "conditions": ["Collect real evidence and ask the user; do not auto-select."]},
+  "decision": {"status": "pending", "plan_id": null, "context_revision": 1, "answer": null},
+  "run_record": [
+    {"role": "planner", "context_id": "synthetic-planner-A", "strategy_id": "boundary", "context_revision": 1, "batch_id": "synthetic-parallel-1", "call_id": "synthetic-call-A", "status": "completed", "trace_ref": "synthetic:E1:not-real-execution:A"},
+    {"role": "planner", "context_id": "synthetic-planner-B", "strategy_id": "replace-engine", "context_revision": 1, "batch_id": "synthetic-parallel-1", "call_id": "synthetic-call-B", "status": "completed", "trace_ref": "synthetic:E1:not-real-execution:B"},
+    {"role": "critic", "context_id": "synthetic-independent-critic", "strategy_id": null, "context_revision": 1, "batch_id": "synthetic-review-1", "call_id": "synthetic-call-critic", "status": "completed", "trace_ref": "synthetic:E1:not-real-execution:critic"}
+  ]
+}

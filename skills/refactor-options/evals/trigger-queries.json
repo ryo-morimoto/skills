@@ -1,0 +1,17 @@
+[
+  {"query":"注文処理の依存を整理する方針を複数出して、移行リスクと工数を比べたい", "should_trigger":true},
+  {"query":"API互換を維持した段階移行と一括移行を比較したい。まだ実装しないで", "should_trigger":true},
+  {"query":"この重複を共通化すべきか、各moduleに閉じるべきか費用対効果を見たい", "should_trigger":true},
+  {"query":"Compare refactoring alternatives for our billing rules while preserving error behavior", "should_trigger":true},
+  {"query":"We need options to reduce coupling, including doing nothing, before choosing a migration", "should_trigger":true},
+  {"query":"リファクタが本当に必要か、現状維持と比較して判断したい", "should_trigger":true},
+  {"query":"注文処理の価格・保存・通知を領域ごとに見て、最低3つの改善候補と併用条件、着手順を比較してほしい。まだ実装はしないで", "should_trigger":true},
+  {"query":"UI状態管理、API境界、永続化でそれぞれ変更負担を減らせる案を挙げたい。同じ対象の三択ではなく、一部や複数を採る判断材料がほしい", "should_trigger":true},
+  {"query":"このfileをformatterに通して", "should_trigger":false},
+  {"query":"合意済みの案Aを実装して。比較はもう終わっています", "should_trigger":false},
+  {"query":"この500エラーを直して。再現手順は以下です", "should_trigger":false},
+  {"query":"依存逆転とは何か説明して", "should_trigger":false},
+  {"query":"Rename this local variable without changing behavior", "should_trigger":false},
+  {"query":"Review this already implemented patch for correctness only", "should_trigger":false},
+  {"query":"価格・保存・通知の領域それぞれの役割を説明して。改善案や計画比較は要りません", "should_trigger":false}
+]

@@ -1,0 +1,153 @@
+{
+  "schema_version": "1.1",
+  "context": {
+    "schema_version": "1.1", "run_id": "synthetic-portfolio", "context_revision": 1,
+    "objective": "Review three synthetic refactoring areas without assuming they are competing alternatives.",
+    "success_scenarios": ["Caller, reporting and persistence changes have explicit ownership and preserved contracts."],
+    "scope": ["Synthetic caller boundary", "Synthetic reporting module", "Synthetic persistence module"],
+    "non_goals": ["Implementing plans or estimating combined portfolio value"],
+    "invariants": ["Preserve observable caller and data contracts."],
+    "snapshot": {"revision": "synthetic-not-a-real-snapshot", "dirty": false, "files": []},
+    "horizon_months": null, "horizon_reason": "Synthetic fixture; no authorized real horizon or effort measurements.",
+    "constraints": [{"id": "G1", "statement": "Preserve caller and data contracts."}],
+    "evidence": [{"id": "E1", "kind": "assumption", "source": "Invented portfolio illustration, not repository inspection or agent execution.", "supports": "Synthetic design and relation assertions only; not measured estimates.", "limitation": "No execution proof, semantic verification, or evidence of safe composition."}],
+    "assumptions": [{"id": "A1", "statement": "P0 migration cost, savings and completion are zero incremental deltas only."}],
+    "unknowns": [{"id": "U1", "statement": "All change-plan costs, savings, duration and real composition effects are unmeasured.", "decision_effect": "No numeric ranking, combined estimate or implementation permission is justified."}],
+    "preferences": ["Keep every plan unimplemented; no automatic selection."]
+  },
+  "planning": {
+    "mode": "portfolio",
+    "areas": [
+      {"id": "callers", "name": "Caller contract boundary", "scope": ["synthetic/callers"], "objective": "Hide rule internals from callers.", "success_scenarios": ["A rule change preserves the facade contract."]},
+      {"id": "reporting", "name": "Reporting ownership", "scope": ["synthetic/reporting"], "objective": "Separate report assembly from rule evaluation.", "success_scenarios": ["A report-format change stays within reporting."]},
+      {"id": "storage", "name": "Persistence port", "scope": ["synthetic/storage"], "objective": "Keep storage-specific mapping outside the rule boundary.", "success_scenarios": ["A storage mapping change preserves caller and data contracts."]}
+    ],
+    "assignments": [
+      {"plan_id": "A", "area_ids": ["callers"], "depends_on": []},
+      {"plan_id": "B", "area_ids": ["reporting"], "depends_on": []},
+      {"plan_id": "C", "area_ids": ["storage"], "depends_on": ["A"]}
+    ],
+    "relations": [
+      {"plan_ids": ["A", "B"], "relationship": "independent", "compatibility": "unknown", "benefit_overlap": "unknown", "reason": "Different change objectives are asserted; shared caller ownership still needs composition review. Area IDs do not prove independence.", "evidence_ids": ["E1"]},
+      {"plan_ids": ["A", "C"], "relationship": "complementary", "compatibility": "compatible", "benefit_overlap": "shared", "reason": "Synthetic storage port is layered behind the proposed facade and requires A; caller-isolation benefits may overlap.", "evidence_ids": ["E1"]},
+      {"plan_ids": ["B", "C"], "relationship": "independent", "compatibility": "compatible", "benefit_overlap": "disjoint", "reason": "This invented review asserts separate reporting and storage behavior, not an inference from different areas or proof of safe composition.", "evidence_ids": ["E1"]}
+    ]
+  },
+  "baseline": {
+    "id": "P0", "strategy_id": "baseline", "plan_revision": 1, "context_revision": 1, "status": "viable",
+    "name": "Retain current ownership", "strategy": "No migration.", "difference": "Zero incremental change, not zero maintenance or risk.",
+    "before": "Synthetic callers, reporting and storage share rule details.", "after": "Unchanged shared ownership.",
+    "scope": ["All three synthetic areas"], "non_goals": ["No restructuring"], "caller_example": "caller -> existingRule(input)",
+    "steps": [], "verification": ["Retain current checks; not executed."],
+    "recovery": {"approach": "Current recovery procedure, unverified.", "irreversible": ["Existing data risks remain."], "hours": {"unit": "person_hour", "low": null, "reference": null, "high": null, "basis": "Unmeasured.", "evidence_ids": [], "assumption_ids": [], "reason": "No recovery measurements."}},
+    "remaining_debt": ["Recurring maintenance and cross-area coupling remain."], "evidence_ids": ["E1"], "assumption_ids": ["A1"], "unknown_ids": ["U1"],
+    "costs": [{"id": "C0", "label": "No incremental migration", "hours": {"unit": "person_hour", "low": 0, "reference": 0, "high": 0, "basis": "No change delta.", "evidence_ids": [], "assumption_ids": ["A1"], "reason": ""}}],
+    "monthly_savings_hours": {"unit": "person_hour/month", "low": 0, "reference": 0, "high": 0, "basis": "No change delta.", "evidence_ids": [], "assumption_ids": ["A1"], "reason": ""},
+    "completion_months": {"unit": "month", "low": 0, "reference": 0, "high": 0, "basis": "No migration.", "evidence_ids": [], "assumption_ids": ["A1"], "reason": ""},
+    "gates": [{"constraint_id": "G1", "status": "pass", "reason": "No proposed contract change; synthetic planning assertion only.", "evidence_ids": ["E1"]}],
+    "risks": [{"id": "R0", "event": "Existing shared ownership can propagate regressions across the three areas.", "phase": "steady", "detection": "Current checks, effectiveness unmeasured.", "mitigation": "Retain current review and recovery procedures.", "residual_severity": null, "severity_reason": "Synthetic example; existing impact is unmeasured, not safe zero.", "recovery_hours": {"unit": "person_hour", "low": null, "reference": null, "high": null, "basis": "No recovery evidence.", "evidence_ids": [], "assumption_ids": [], "reason": "Existing recovery effort is unknown."}, "likelihood": "Unknown; no frequency data.", "evidence_ids": ["E1"]}]
+  },
+  "plans": [
+    {
+      "id": "A", "strategy_id": "caller-facade", "plan_revision": 1, "context_revision": 1, "status": "viable",
+      "name": "Introduce caller facade", "strategy": "Put a stable rule interface between callers and internals.", "difference": "Owns caller contract rather than reporting assembly or persistence mapping.",
+      "before": "Callers import rule internals.", "after": "Callers use a facade; internals remain.",
+      "scope": ["synthetic/callers", "synthetic/facade"], "non_goals": ["Replace engine or storage"], "caller_example": "caller -> facade.evaluate(input)",
+      "steps": [{"id": "S1", "description": "Specify parity cases, then plan caller routing behind facade.", "depends_on": [], "files": ["synthetic/facade"], "acceptance": "Proposed parity checks preserve caller behavior."}],
+      "verification": ["Propose caller characterization and routing parity checks; not executed."],
+      "recovery": {"approach": "Retain original entry point and restore routing.", "irreversible": ["No retirement before separate approval."], "hours": {"unit": "person_hour", "low": null, "reference": null, "high": null, "basis": "Unmeasured.", "evidence_ids": [], "assumption_ids": [], "reason": "No recovery measurements."}},
+      "remaining_debt": ["Internal engine coupling remains."], "evidence_ids": ["E1"], "assumption_ids": [], "unknown_ids": ["U1"],
+      "costs": [{"id": "CA", "label": "Unestimated facade and caller migration", "hours": {"unit": "person_hour", "low": null, "reference": null, "high": null, "basis": "No empirical estimates.", "evidence_ids": [], "assumption_ids": [], "reason": "Synthetic design only; effort unmeasured."}}],
+      "monthly_savings_hours": {"unit": "person_hour/month", "low": null, "reference": null, "high": null, "basis": "No change-frequency data.", "evidence_ids": [], "assumption_ids": [], "reason": "Recurring savings unmeasured."},
+      "completion_months": {"unit": "month", "low": null, "reference": null, "high": null, "basis": "No staffing evidence.", "evidence_ids": [], "assumption_ids": [], "reason": "Duration unmeasured."},
+      "gates": [{"constraint_id": "G1", "status": "pass", "reason": "Synthetic facade preserves declared contract in the proposal, not executed verification.", "evidence_ids": ["E1"]}],
+      "risks": [{"id": "RA", "event": "Facade routing can change caller-visible behavior.", "phase": "migration", "detection": "Proposed parity checks, not executed.", "mitigation": "Retain original caller route until parity and recovery are verified.", "residual_severity": null, "severity_reason": "Synthetic example; real caller impact is unmeasured.", "recovery_hours": {"unit": "person_hour", "low": null, "reference": null, "high": null, "basis": "No recovery evidence.", "evidence_ids": [], "assumption_ids": [], "reason": "Routing restoration effort is unknown."}, "likelihood": "Unknown; no frequency data.", "evidence_ids": ["E1"]}]
+    },
+    {
+      "id": "B", "strategy_id": "report-module", "plan_revision": 1, "context_revision": 1, "status": "viable",
+      "name": "Extract reporting ownership", "strategy": "Move report formatting into a reporting module with explicit input contract.", "difference": "Owns report assembly, not rule evaluation or storage mapping.",
+      "before": "Formatting and rule evaluation share a module.", "after": "Reporting consumes a documented rule result.",
+      "scope": ["synthetic/reporting"], "non_goals": ["Change report output or rule evaluation"], "caller_example": "reporter.render(ruleResult)",
+      "steps": [{"id": "S1", "description": "Capture report outputs and plan extraction without output changes.", "depends_on": [], "files": ["synthetic/reporting"], "acceptance": "Proposed golden-output checks preserve report content."}],
+      "verification": ["Propose report-output parity checks; not executed."],
+      "recovery": {"approach": "Keep legacy reporting route and restore it if parity fails.", "irreversible": ["Delay removal of the legacy route."], "hours": {"unit": "person_hour", "low": null, "reference": null, "high": null, "basis": "Unmeasured.", "evidence_ids": [], "assumption_ids": [], "reason": "No recovery measurements."}},
+      "remaining_debt": ["Rule result contract may still expose internal details."], "evidence_ids": ["E1"], "assumption_ids": [], "unknown_ids": ["U1"],
+      "costs": [{"id": "CB", "label": "Unestimated reporting extraction", "hours": {"unit": "person_hour", "low": null, "reference": null, "high": null, "basis": "No empirical estimates.", "evidence_ids": [], "assumption_ids": [], "reason": "Synthetic design only; effort unmeasured."}}],
+      "monthly_savings_hours": {"unit": "person_hour/month", "low": null, "reference": null, "high": null, "basis": "No change-frequency data.", "evidence_ids": [], "assumption_ids": [], "reason": "Recurring savings unmeasured."},
+      "completion_months": {"unit": "month", "low": null, "reference": null, "high": null, "basis": "No staffing evidence.", "evidence_ids": [], "assumption_ids": [], "reason": "Duration unmeasured."},
+      "gates": [{"constraint_id": "G1", "status": "pass", "reason": "Synthetic reporting contract is preserved in the proposal, not executed verification.", "evidence_ids": ["E1"]}],
+      "risks": [{"id": "RB", "event": "Extraction can alter report content or ordering.", "phase": "migration", "detection": "Proposed golden-output checks, not executed.", "mitigation": "Retain the legacy report route until output parity is verified.", "residual_severity": null, "severity_reason": "Synthetic example; report impact is unmeasured.", "recovery_hours": {"unit": "person_hour", "low": null, "reference": null, "high": null, "basis": "No recovery evidence.", "evidence_ids": [], "assumption_ids": [], "reason": "Reporting restoration effort is unknown."}, "likelihood": "Unknown; no frequency data.", "evidence_ids": ["E1"]}]
+    },
+    {
+      "id": "C", "strategy_id": "storage-port", "plan_revision": 1, "context_revision": 1, "status": "viable",
+      "name": "Introduce persistence port", "strategy": "Layer a persistence mapping port behind A's caller facade.", "difference": "Owns storage mapping while depending on the facade contract.",
+      "before": "Rule internals directly construct persistence records.", "after": "A storage adapter implements a rule-owned persistence port.",
+      "scope": ["synthetic/storage"], "non_goals": ["Change persisted format or retire legacy data"], "caller_example": "facade -> rule -> persistencePort -> adapter",
+      "steps": [{"id": "S1", "description": "After A, plan the storage port and adapter with data parity checkpoints.", "depends_on": [], "files": ["synthetic/storage"], "acceptance": "Proposed mapping parity checks preserve persisted data."}],
+      "verification": ["Propose mapping round-trip and recovery rehearsal checks; not executed."],
+      "recovery": {"approach": "Retain original storage route and format; restore routing at parity checkpoints.", "irreversible": ["No data deletion or legacy format retirement is proposed."], "hours": {"unit": "person_hour", "low": null, "reference": null, "high": null, "basis": "Unmeasured.", "evidence_ids": [], "assumption_ids": [], "reason": "No recovery measurements."}},
+      "remaining_debt": ["Legacy storage format remains."], "evidence_ids": ["E1"], "assumption_ids": [], "unknown_ids": ["U1"],
+      "costs": [{"id": "CC", "label": "Unestimated persistence port and adapter", "hours": {"unit": "person_hour", "low": null, "reference": null, "high": null, "basis": "No empirical estimates.", "evidence_ids": [], "assumption_ids": [], "reason": "Synthetic design only; effort unmeasured."}}],
+      "monthly_savings_hours": {"unit": "person_hour/month", "low": null, "reference": null, "high": null, "basis": "No change-frequency data.", "evidence_ids": [], "assumption_ids": [], "reason": "Recurring savings unmeasured."},
+      "completion_months": {"unit": "month", "low": null, "reference": null, "high": null, "basis": "No staffing evidence.", "evidence_ids": [], "assumption_ids": [], "reason": "Duration unmeasured."},
+      "gates": [{"constraint_id": "G1", "status": "pass", "reason": "Synthetic mapping contract is preserved in the proposal, not executed verification.", "evidence_ids": ["E1"]}],
+      "risks": [{"id": "RC", "event": "Adapter mapping can alter stored records.", "phase": "migration", "detection": "Proposed mapping parity checks, not executed.", "mitigation": "Retain original format and route; gate routing changes on mapping and recovery checks.", "residual_severity": null, "severity_reason": "Synthetic example; data impact is unmeasured.", "recovery_hours": {"unit": "person_hour", "low": null, "reference": null, "high": null, "basis": "No recovery evidence.", "evidence_ids": [], "assumption_ids": [], "reason": "Storage restoration effort is unknown."}, "likelihood": "Unknown; no frequency data.", "evidence_ids": ["E1"]}]
+    }
+  ],
+  "critique": {
+    "context_revision": 1,
+    "reviewed_plans": [{"plan_id": "P0", "plan_revision": 1}, {"plan_id": "A", "plan_revision": 1}, {"plan_id": "B", "plan_revision": 1}, {"plan_id": "C", "plan_revision": 1}],
+    "findings": [{"id": "F1", "plan_id": null, "severity": "minor", "issue": "This is entirely synthetic, not a claim about any real codebase or agent execution.", "evidence_ids": ["E1"], "fix": "Collect authorized evidence and resolve unknown compatibility before any real decision."}],
+    "disagreements": ["No real planner or critic was run. Individual planning plausibility is separate from composition review."],
+    "design_review": {
+      "version": "1.0",
+      "pairwise": [
+        {"plan_ids": ["A", "B"], "status": "distinct", "axes": [{"axis": "responsibility", "difference": "A isolates caller access; B separates report assembly.", "evidence_ids": ["E1"]}], "reason": "Different responsibilities, not proof of mutual exclusivity or compatibility."},
+        {"plan_ids": ["A", "C"], "status": "overlapping", "axes": [{"axis": "dependencies", "difference": "C owns persistence mapping behind A's facade and requires A.", "evidence_ids": ["E1"]}], "reason": "Related boundaries with potentially shared caller-isolation benefits."},
+        {"plan_ids": ["B", "C"], "status": "distinct", "axes": [{"axis": "contract", "difference": "B preserves report outputs; C preserves persisted mappings.", "evidence_ids": ["E1"]}], "reason": "Different contracts, not evidence of additive benefits."}
+      ],
+      "plans": [
+        {"plan_id": "P0", "status": "plausible", "checks": [
+          {"criterion": "goal_fit", "status": "pass", "reason": "Deliberate no-change reference, not an improvement claim.", "evidence_ids": ["E1"]},
+          {"criterion": "responsibility", "status": "pass", "reason": "Existing ownership is explicitly retained.", "evidence_ids": ["E1"]},
+          {"criterion": "dependencies", "status": "pass", "reason": "No new dependencies are proposed.", "evidence_ids": ["E1"]},
+          {"criterion": "contract", "status": "pass", "reason": "No contract change is proposed.", "evidence_ids": ["E1"]},
+          {"criterion": "migration", "status": "pass", "reason": "No migration is proposed.", "evidence_ids": ["E1"]},
+          {"criterion": "verification_recovery", "status": "pass", "reason": "Existing checks and recovery are retained, not executed or certified.", "evidence_ids": ["E1"]}
+        ], "unresolved": []},
+        {"plan_id": "A", "status": "plausible", "checks": [
+          {"criterion": "goal_fit", "status": "pass", "reason": "Facade addresses caller coupling in this invented design.", "evidence_ids": ["E1"]},
+          {"criterion": "responsibility", "status": "pass", "reason": "Facade owns caller contract only.", "evidence_ids": ["E1"]},
+          {"criterion": "dependencies", "status": "pass", "reason": "Callers depend on facade instead of internals.", "evidence_ids": ["E1"]},
+          {"criterion": "contract", "status": "pass", "reason": "Observable caller behavior is declared unchanged.", "evidence_ids": ["E1"]},
+          {"criterion": "migration", "status": "pass", "reason": "Parity checkpoints precede caller routing changes.", "evidence_ids": ["E1"]},
+          {"criterion": "verification_recovery", "status": "pass", "reason": "Parity and routing restoration are proposed, not executed.", "evidence_ids": ["E1"]}
+        ], "unresolved": []},
+        {"plan_id": "B", "status": "plausible", "checks": [
+          {"criterion": "goal_fit", "status": "pass", "reason": "Reporting extraction addresses format-change ownership.", "evidence_ids": ["E1"]},
+          {"criterion": "responsibility", "status": "pass", "reason": "Reporting owns assembly, not rule evaluation.", "evidence_ids": ["E1"]},
+          {"criterion": "dependencies", "status": "pass", "reason": "Reporting consumes an explicit rule result contract.", "evidence_ids": ["E1"]},
+          {"criterion": "contract", "status": "pass", "reason": "Existing report outputs are declared unchanged.", "evidence_ids": ["E1"]},
+          {"criterion": "migration", "status": "pass", "reason": "Capture report cases before extraction.", "evidence_ids": ["E1"]},
+          {"criterion": "verification_recovery", "status": "pass", "reason": "Output parity and legacy route recovery are proposed, not executed.", "evidence_ids": ["E1"]}
+        ], "unresolved": []},
+        {"plan_id": "C", "status": "plausible", "checks": [
+          {"criterion": "goal_fit", "status": "pass", "reason": "Persistence port addresses storage mapping ownership.", "evidence_ids": ["E1"]},
+          {"criterion": "responsibility", "status": "pass", "reason": "Adapter owns persisted mapping, not rule policy.", "evidence_ids": ["E1"]},
+          {"criterion": "dependencies", "status": "pass", "reason": "Adapter implements rule-owned port after A is established.", "evidence_ids": ["E1"]},
+          {"criterion": "contract", "status": "pass", "reason": "Persisted format and caller contracts remain unchanged.", "evidence_ids": ["E1"]},
+          {"criterion": "migration", "status": "pass", "reason": "Mapping parity checkpoints precede storage routing changes.", "evidence_ids": ["E1"]},
+          {"criterion": "verification_recovery", "status": "pass", "reason": "Mapping checks and original storage route are proposed, not executed.", "evidence_ids": ["E1"]}
+        ], "unresolved": []}
+      ]
+    }
+  },
+  "recommendation": {"plan_id": null, "plan_ids": [], "reason": "No synthetic portfolio is automatically recommended. Resolve unknown composition effects and gather real measurements.", "conditions": []},
+  "decision": {"status": "pending", "plan_id": null, "plan_ids": [], "context_revision": 1, "answer": null},
+  "run_record": [
+    {"role": "planner", "context_id": "synthetic-context-A", "strategy_id": "caller-facade", "context_revision": 1, "batch_id": "synthetic-batch", "call_id": "synthetic-call-A", "status": "completed", "trace_ref": "synthetic:not-real-execution:A"},
+    {"role": "planner", "context_id": "synthetic-context-B", "strategy_id": "report-module", "context_revision": 1, "batch_id": "synthetic-batch", "call_id": "synthetic-call-B", "status": "completed", "trace_ref": "synthetic:not-real-execution:B"},
+    {"role": "planner", "context_id": "synthetic-context-C", "strategy_id": "storage-port", "context_revision": 1, "batch_id": "synthetic-batch", "call_id": "synthetic-call-C", "status": "completed", "trace_ref": "synthetic:not-real-execution:C"},
+    {"role": "critic", "context_id": "synthetic-context-critic", "strategy_id": null, "context_revision": 1, "batch_id": "synthetic-review", "call_id": "synthetic-call-critic", "status": "completed", "trace_ref": "synthetic:not-real-execution:critic"}
+  ]
+}

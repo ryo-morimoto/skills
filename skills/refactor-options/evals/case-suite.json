@@ -1,0 +1,24 @@
+{
+  "suite_version": "1.0",
+  "skill_version": "0.3.0",
+  "status": "defined-not-run",
+  "new_case_count": 13,
+  "new_assertion_count": 39,
+  "existing_cases": ["local-boundary", "parallel-unavailable", "three-alternatives", "area-portfolio"],
+  "cases": [
+    {"id": "portfolio-discovery", "phase": "generation", "covers": ["area_discovery", "minimum_three", "parallelism", "domain_goal_fit"]},
+    {"id": "area-local-alternatives", "phase": "generation", "covers": ["local_three", "four_or_more", "within_area_alternatives", "cross_area_composition"]},
+    {"id": "insufficient-real-options", "phase": "generation", "covers": ["no_padding", "scope_boundary", "honest_incomplete", "behavior_preservation"]},
+    {"id": "scope-injection", "phase": "generation", "covers": ["untrusted_instructions", "no_execution", "real_parallelism", "no_fake_consent"]},
+    {"id": "portfolio-prerequisites", "phase": "review", "covers": ["dependency_direction", "prerequisite_closure", "intermediate_state"]},
+    {"id": "portfolio-conflicts", "phase": "review", "covers": ["alternative_pairs", "conflicting_sets", "partial_adoption"]},
+    {"id": "shared-benefit-overlap", "phase": "review", "covers": ["shared_cost", "shared_benefit", "conditional_arithmetic", "unknown_interactions"]},
+    {"id": "renamed-duplicates", "phase": "review", "covers": ["duplicate_detection", "validity_independence", "honest_distinct_count"]},
+    {"id": "contract-breaking-candidate", "phase": "review", "covers": ["tuple_order", "error_contract", "invalid_exclusion", "preserve_original_findings"]},
+    {"id": "unknown-costs-no-rank", "phase": "review", "covers": ["unknown_not_zero", "unit_separation", "ordinal_risk", "conditional_priority"]},
+    {"id": "snapshot-revision-change", "phase": "review", "covers": ["stale_revision", "changed_invariants", "independent_deployment", "consent_revision"]},
+    {"id": "two-context-limit", "phase": "capability", "covers": ["minimum_three_contexts", "blocked", "no_silent_fallback"]},
+    {"id": "selection-no-implementation", "phase": "lifecycle", "covers": ["multi_selection", "current_revision", "stop_after_selection", "no_trace_fabrication"]}
+  ],
+  "results_policy": "Definitions only. Future runs belong under evals/results in a fresh iteration; do not rewrite previous results or infer model success from packaging checks."
+}

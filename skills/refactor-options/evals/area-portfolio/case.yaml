@@ -1,0 +1,8 @@
+schema_version: "1.1"
+name: area-portfolio
+expected_outcome: |
+  P0を除き3領域から最低3つの完全な改善候補を独立planner並列で生成する。
+  単一scopeの方式三択へ変えず、領域別の目的・妥当性・全ペアの併用条件を評価する。
+  SQLと通知の契約・副作用順を保存し、便益や費用を単純加算せず、pendingで停止する。
+context:
+  scaffold_script: place-files.sh

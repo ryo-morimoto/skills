@@ -1,0 +1,8 @@
+schema_version: "1.1"
+name: area-local-alternatives
+expected_outcome: |
+  ルール領域で代替3候補以上、送信領域で1候補以上、P0別枠を維持する。
+  最低4変更候補を必要とする依頼を3案上限へ切り詰めない。
+  領域内の代替関係と領域間の併用条件を区別し、成立条件・不成立を隠さない。
+context:
+  scaffold_script: place-files.sh

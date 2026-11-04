@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: two-context-limit
+expected_outcome: |
+  最低3plannerという現行契約に対して総数2の承認では不足すると判断しblockedで停止する。
+  不足能力と再開条件を示し、対象コード調査・計算・planner起動を始めない。
+  P0や逐次生成や仮想会話で不足を隠さない。

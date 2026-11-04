@@ -1,0 +1,11 @@
+interface:
+  display_name: "リファクタ候補の比較"
+  short_description: "最低3つの方式・領域別候補を並列検討し、根拠付きで比較する"
+  default_prompt: "Use $refactor-options to compare at least three refactoring candidates, including area-by-area opportunities, while preserving contracts and stopping before implementation."
+policy:
+  products:
+    - chatgpt
+    - codex
+    - api
+    - atlas
+  allow_implicit_invocation: true

@@ -1,0 +1,62 @@
+{
+  "context_revision": 1,
+  "reviewed_plans": [
+    {"plan_id": "P0", "plan_revision": 1},
+    {"plan_id": "A", "plan_revision": 1},
+    {"plan_id": "B", "plan_revision": 1}
+  ],
+  "findings": [],
+  "disagreements": ["Entirely synthetic planning illustration for example-decision.json; no real inspection, critic execution, or test execution. E1 refers to that packet's synthetic evidence registry."],
+  "design_review": {
+    "version": "1.0",
+    "pairwise": [
+      {
+        "plan_ids": ["A", "B"],
+        "status": "distinct",
+        "axes": [
+          {"axis": "responsibility", "difference": "A isolates callers behind a facade while retaining internals; B replaces the internal rule representation behind a compatibility adapter.", "evidence_ids": ["E1"]},
+          {"axis": "migration", "difference": "A moves caller entry points; B also stages model coexistence and legacy retirement.", "evidence_ids": ["E1"]}
+        ],
+        "reason": "Synthetic structural and migration differences, not merely different strategy IDs or cost estimates."
+      }
+    ],
+    "plans": [
+      {
+        "plan_id": "P0", "status": "plausible",
+        "checks": [
+          {"criterion": "goal_fit", "status": "pass", "reason": "Deliberate no-change reference exposes retained maintenance, not an improvement claim.", "evidence_ids": ["E1"]},
+          {"criterion": "responsibility", "status": "pass", "reason": "Existing ownership remains unchanged and its coupling is acknowledged.", "evidence_ids": ["E1"]},
+          {"criterion": "dependencies", "status": "pass", "reason": "No dependency changes are proposed.", "evidence_ids": ["E1"]},
+          {"criterion": "contract", "status": "pass", "reason": "Existing caller contract is retained by the no-change baseline.", "evidence_ids": ["E1"]},
+          {"criterion": "migration", "status": "pass", "reason": "No migration or retirement is proposed.", "evidence_ids": ["E1"]},
+          {"criterion": "verification_recovery", "status": "pass", "reason": "Baseline retains current regression and recovery procedures and records their unverified effectiveness; this is not executed success.", "evidence_ids": ["E1"]}
+        ],
+        "unresolved": ["Actual recovery effectiveness and recurring maintenance cost remain unmeasured."]
+      },
+      {
+        "plan_id": "A", "status": "plausible",
+        "checks": [
+          {"criterion": "goal_fit", "status": "pass", "reason": "A stable caller boundary plausibly reduces propagated changes; savings are unmeasured.", "evidence_ids": ["E1"]},
+          {"criterion": "responsibility", "status": "pass", "reason": "Facade owns caller translation; existing rule ownership stays internal.", "evidence_ids": ["E1"]},
+          {"criterion": "dependencies", "status": "pass", "reason": "Callers depend on the facade rather than rule internals.", "evidence_ids": ["E1"]},
+          {"criterion": "contract", "status": "pass", "reason": "Observable parity is explicitly proposed, not verified by this illustration.", "evidence_ids": ["E1"]},
+          {"criterion": "migration", "status": "pass", "reason": "Characterization precedes caller migration.", "evidence_ids": ["E1"]},
+          {"criterion": "verification_recovery", "status": "pass", "reason": "Proposed parity checks and retained original entry point support a coherent recovery plan; no tests ran.", "evidence_ids": ["E1"]}
+        ],
+        "unresolved": ["Empirical effort and savings estimates are not available; this alone does not invalidate architecture."]
+      },
+      {
+        "plan_id": "B", "status": "conditional",
+        "checks": [
+          {"criterion": "goal_fit", "status": "pass", "reason": "Declarative rules plausibly isolate recurring rule changes.", "evidence_ids": ["E1"]},
+          {"criterion": "responsibility", "status": "pass", "reason": "Adapter owns compatibility while the new model owns rule evaluation.", "evidence_ids": ["E1"]},
+          {"criterion": "dependencies", "status": "pass", "reason": "Caller dependencies terminate at the compatibility adapter.", "evidence_ids": ["E1"]},
+          {"criterion": "contract", "status": "pass", "reason": "Existing behavior is the stated parity target.", "evidence_ids": ["E1"]},
+          {"criterion": "migration", "status": "pass", "reason": "Model coexistence precedes retirement.", "evidence_ids": ["E1"]},
+          {"criterion": "verification_recovery", "status": "conditional", "reason": "Recovery checkpoints must be specified before irreversible legacy retirement.", "evidence_ids": ["E1"]}
+        ],
+        "unresolved": ["Specify and review retained legacy routing and recovery checkpoints before retirement."]
+      }
+    ]
+  }
+}

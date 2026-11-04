@@ -1,0 +1,8 @@
+schema_version: "1.1"
+name: portfolio-conflicts
+expected_outcome: |
+  A/Bを同一責務の代替方式として扱い、両方を同時採用するセットを拒否する。
+  Cは別の通知領域であり、A+CとB+Cを個別の条件付き組合せとして残す。
+  領域名や個別妥当性だけから3案の同時採用を導かない。
+context:
+  scaffold_script: place-files.sh

@@ -1,0 +1,8 @@
+schema_version: "1.1"
+name: three-alternatives
+expected_outcome: |
+  同一scopeの変更方式を最低3つ、P0とは別に比較する。
+  3plannerを同一batchで起動し、独立criticが全3ペアとP0を含む各案を評価する。
+  改名や不成立案で3つの妥当な方式を検証したと装わず、未知と契約を保つ。
+context:
+  scaffold_script: place-files.sh

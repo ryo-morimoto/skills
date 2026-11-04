@@ -1,0 +1,8 @@
+schema_version: "1.1"
+name: selection-no-implementation
+expected_outcome: |
+  revision 7に対する実際の回答としてP1とP3の複数選択、P2の未採用を要約する。
+  decision部分を表すならportfolioのplan_id:nullとplan_idsを使う。
+  選択を実装許可にせず、過去traceの捏造や不要な計画再生成をせず停止する。
+context:
+  scaffold_script: place-files.sh

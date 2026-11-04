@@ -1,0 +1,8 @@
+schema_version: "1.1"
+name: local-boundary
+expected_outcome: |
+  同一目的の異なる方針を別contextで並列検討し、独立criticを経てP0と比較する。
+  外部契約、移行、検証、回復、根拠、工数と効果の未知を保持する。
+  コードを変更せず、無条件の数値順位・自動選択・実装開始をしない。
+context:
+  scaffold_script: place-files.sh

@@ -1,0 +1,8 @@
+schema_version: "1.1"
+name: portfolio-discovery
+expected_outcome: |
+  コードから責務・変更scenarioを発見し、P0以外に最低3つの完全な領域別改善候補を生成する。
+  領域名の正解一致ではなく、対象箇所と目的の根拠、coverage、組合せと個別設計を評価する。
+  3つ以上の独立plannerの同一parallel batchと、その後の別criticがtraceで確認できる。
+context:
+  scaffold_script: place-files.sh

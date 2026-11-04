@@ -1,0 +1,8 @@
+schema_version: "1.1"
+name: snapshot-revision-change
+expected_outcome: |
+  context revision 1の前提と承認をstaleとして区別し、revision 2へ無条件に持ち越さない。
+  領域別ルール差と独立配布の追加が共通化・移行・回復の成立性を変えると認識する。
+  再確認の必要な情報を明示し、未取得の見積・実行trace・成功を捏造しない。
+context:
+  scaffold_script: place-files.sh

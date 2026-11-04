@@ -1,0 +1,221 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$ref": "#/$defs/decision_packet",
+  "$defs": {
+    "text": {"type": "string", "minLength": 1},
+    "texts": {"type": "array", "items": {"$ref": "#/$defs/text"}},
+    "revision": {"type": "integer", "minimum": 1},
+    "range": {
+      "type": "object", "additionalProperties": false,
+      "required": ["unit", "low", "reference", "high", "basis", "evidence_ids", "assumption_ids", "reason"],
+      "properties": {
+        "unit": {"$ref": "#/$defs/text"},
+        "low": {"type": ["number", "null"], "minimum": 0},
+        "reference": {"type": ["number", "null"], "minimum": 0},
+        "high": {"type": ["number", "null"], "minimum": 0},
+        "basis": {"$ref": "#/$defs/text"},
+        "evidence_ids": {"$ref": "#/$defs/texts"},
+        "assumption_ids": {"$ref": "#/$defs/texts"},
+        "reason": {"type": "string"}
+      }
+    },
+    "evidence": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "kind", "source", "supports", "limitation"],
+      "properties": {
+        "id": {"$ref": "#/$defs/text"},
+        "kind": {"enum": ["observed", "analogous", "expert", "assumption", "unknown"]},
+        "source": {"$ref": "#/$defs/text"}, "supports": {"$ref": "#/$defs/text"},
+        "limitation": {"$ref": "#/$defs/text"}
+      }
+    },
+    "statement": {
+      "type": "object", "additionalProperties": false, "required": ["id", "statement"],
+      "properties": {"id": {"$ref": "#/$defs/text"}, "statement": {"$ref": "#/$defs/text"}}
+    },
+    "unknown": {
+      "type": "object", "additionalProperties": false, "required": ["id", "statement", "decision_effect"],
+      "properties": {"id": {"$ref": "#/$defs/text"}, "statement": {"$ref": "#/$defs/text"}, "decision_effect": {"$ref": "#/$defs/text"}}
+    },
+    "snapshot_file": {
+      "type": "object", "additionalProperties": false, "required": ["path", "sha256"],
+      "properties": {"path": {"$ref": "#/$defs/text"}, "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}}
+    },
+    "snapshot": {
+      "type": "object", "additionalProperties": false, "required": ["revision", "dirty", "files"],
+      "properties": {"revision": {"$ref": "#/$defs/text"}, "dirty": {"type": "boolean"}, "files": {"type": "array", "items": {"$ref": "#/$defs/snapshot_file"}}}
+    },
+    "shared_context": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "run_id", "context_revision", "objective", "success_scenarios", "scope", "non_goals", "invariants", "snapshot", "horizon_months", "horizon_reason", "constraints", "evidence", "assumptions", "unknowns", "preferences"],
+      "properties": {
+        "schema_version": {"enum": ["1.0", "1.1"]}, "run_id": {"$ref": "#/$defs/text"}, "context_revision": {"$ref": "#/$defs/revision"},
+        "objective": {"$ref": "#/$defs/text"}, "success_scenarios": {"$ref": "#/$defs/texts"},
+        "scope": {"$ref": "#/$defs/texts"}, "non_goals": {"$ref": "#/$defs/texts"}, "invariants": {"$ref": "#/$defs/texts"},
+        "snapshot": {"$ref": "#/$defs/snapshot"}, "horizon_months": {"type": ["number", "null"], "minimum": 0}, "horizon_reason": {"$ref": "#/$defs/text"},
+        "constraints": {"type": "array", "items": {"$ref": "#/$defs/statement"}},
+        "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}},
+        "assumptions": {"type": "array", "items": {"$ref": "#/$defs/statement"}},
+        "unknowns": {"type": "array", "items": {"$ref": "#/$defs/unknown"}}, "preferences": {"$ref": "#/$defs/texts"}
+      }
+    },
+    "strategy_task": {
+      "type": "object", "additionalProperties": false, "required": ["strategy_id", "context_revision", "direction", "design_difference", "weakness"],
+      "properties": {"strategy_id": {"$ref": "#/$defs/text"}, "context_revision": {"$ref": "#/$defs/revision"}, "direction": {"$ref": "#/$defs/text"}, "design_difference": {"$ref": "#/$defs/text"}, "weakness": {"$ref": "#/$defs/text"}}
+    },
+    "step": {
+      "type": "object", "additionalProperties": false, "required": ["id", "description", "depends_on", "files", "acceptance"],
+      "properties": {"id": {"$ref": "#/$defs/text"}, "description": {"$ref": "#/$defs/text"}, "depends_on": {"$ref": "#/$defs/texts"}, "files": {"$ref": "#/$defs/texts"}, "acceptance": {"$ref": "#/$defs/text"}}
+    },
+    "recovery": {
+      "type": "object", "additionalProperties": false, "required": ["approach", "irreversible", "hours"],
+      "properties": {"approach": {"$ref": "#/$defs/text"}, "irreversible": {"$ref": "#/$defs/texts"}, "hours": {"$ref": "#/$defs/range"}}
+    },
+    "cost": {
+      "type": "object", "additionalProperties": false, "required": ["id", "label", "hours"],
+      "properties": {"id": {"$ref": "#/$defs/text"}, "label": {"$ref": "#/$defs/text"}, "hours": {"$ref": "#/$defs/range"}}
+    },
+    "gate": {
+      "type": "object", "additionalProperties": false, "required": ["constraint_id", "status", "reason", "evidence_ids"],
+      "properties": {"constraint_id": {"$ref": "#/$defs/text"}, "status": {"enum": ["pass", "fail", "unknown"]}, "reason": {"$ref": "#/$defs/text"}, "evidence_ids": {"$ref": "#/$defs/texts"}}
+    },
+    "risk": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "event", "phase", "detection", "mitigation", "residual_severity", "severity_reason", "recovery_hours", "likelihood", "evidence_ids"],
+      "properties": {
+        "id": {"$ref": "#/$defs/text"}, "event": {"$ref": "#/$defs/text"}, "phase": {"enum": ["migration", "steady"]},
+        "detection": {"$ref": "#/$defs/text"}, "mitigation": {"$ref": "#/$defs/text"},
+        "residual_severity": {"type": ["integer", "null"], "minimum": 1, "maximum": 5}, "severity_reason": {"$ref": "#/$defs/text"},
+        "recovery_hours": {"$ref": "#/$defs/range"}, "likelihood": {"$ref": "#/$defs/text"}, "evidence_ids": {"$ref": "#/$defs/texts"}
+      }
+    },
+    "plan_result": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "strategy_id", "plan_revision", "context_revision", "status", "name", "strategy", "difference", "before", "after", "scope", "non_goals", "caller_example", "steps", "verification", "recovery", "remaining_debt", "evidence_ids", "assumption_ids", "unknown_ids", "costs", "monthly_savings_hours", "completion_months", "gates", "risks"],
+      "properties": {
+        "id": {"$ref": "#/$defs/text"}, "strategy_id": {"$ref": "#/$defs/text"}, "plan_revision": {"$ref": "#/$defs/revision"}, "context_revision": {"$ref": "#/$defs/revision"},
+        "status": {"enum": ["viable", "infeasible", "incomplete"]}, "name": {"$ref": "#/$defs/text"}, "strategy": {"$ref": "#/$defs/text"}, "difference": {"$ref": "#/$defs/text"},
+        "before": {"$ref": "#/$defs/text"}, "after": {"$ref": "#/$defs/text"}, "scope": {"$ref": "#/$defs/texts"}, "non_goals": {"$ref": "#/$defs/texts"}, "caller_example": {"$ref": "#/$defs/text"},
+        "steps": {"type": "array", "items": {"$ref": "#/$defs/step"}}, "verification": {"$ref": "#/$defs/texts"}, "recovery": {"$ref": "#/$defs/recovery"}, "remaining_debt": {"$ref": "#/$defs/texts"},
+        "evidence_ids": {"$ref": "#/$defs/texts"}, "assumption_ids": {"$ref": "#/$defs/texts"}, "unknown_ids": {"$ref": "#/$defs/texts"},
+        "costs": {"type": "array", "items": {"$ref": "#/$defs/cost"}}, "monthly_savings_hours": {"$ref": "#/$defs/range"}, "completion_months": {"$ref": "#/$defs/range"},
+        "gates": {"type": "array", "items": {"$ref": "#/$defs/gate"}}, "risks": {"type": "array", "items": {"$ref": "#/$defs/risk"}}
+      }
+    },
+    "reviewed_plan": {
+      "type": "object", "additionalProperties": false, "required": ["plan_id", "plan_revision"],
+      "properties": {"plan_id": {"$ref": "#/$defs/text"}, "plan_revision": {"$ref": "#/$defs/revision"}}
+    },
+    "finding": {
+      "type": "object", "additionalProperties": false, "required": ["id", "plan_id", "severity", "issue", "evidence_ids", "fix"],
+      "properties": {"id": {"$ref": "#/$defs/text"}, "plan_id": {"type": ["string", "null"], "minLength": 1}, "severity": {"enum": ["blocking", "major", "minor"]}, "issue": {"$ref": "#/$defs/text"}, "evidence_ids": {"$ref": "#/$defs/texts"}, "fix": {"$ref": "#/$defs/text"}}
+    },
+    "design_axis": {
+      "type": "object", "additionalProperties": false, "required": ["axis", "difference", "evidence_ids"],
+      "properties": {
+        "axis": {"enum": ["responsibility", "dependencies", "contract", "migration", "recovery", "complexity"]},
+        "difference": {"$ref": "#/$defs/text"}, "evidence_ids": {"$ref": "#/$defs/texts"}
+      }
+    },
+    "design_pair": {
+      "description": "Two unique change-plan IDs, excluding P0. Distinct/overlapping requires at least one substantive axis. Duplicate is a diversity warning, not individual invalidity. Semantic rules are enforced by compare.py.",
+      "type": "object", "additionalProperties": false, "required": ["plan_ids", "status", "axes", "reason"],
+      "properties": {
+        "plan_ids": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"$ref": "#/$defs/text"}},
+        "status": {"enum": ["distinct", "overlapping", "duplicate", "unknown"]},
+        "axes": {"type": "array", "items": {"$ref": "#/$defs/design_axis"}}, "reason": {"$ref": "#/$defs/text"}
+      }
+    },
+    "design_check": {
+      "type": "object", "additionalProperties": false, "required": ["criterion", "status", "reason", "evidence_ids"],
+      "properties": {
+        "criterion": {"enum": ["goal_fit", "responsibility", "dependencies", "contract", "migration", "verification_recovery"]},
+        "status": {"enum": ["pass", "conditional", "fail", "unknown"]},
+        "reason": {"$ref": "#/$defs/text"}, "evidence_ids": {"$ref": "#/$defs/texts"}
+      }
+    },
+    "design_plan_review": {
+      "description": "Exactly one of each of the six planning criteria. Plausible means all pass; invalid requires at least one fail and any fail requires invalid; conditional requires conditional/unknown and no fail; unknown requires unknown and no fail. Not executed test success.",
+      "type": "object", "additionalProperties": false, "required": ["plan_id", "status", "checks", "unresolved"],
+      "properties": {
+        "plan_id": {"$ref": "#/$defs/text"}, "status": {"enum": ["plausible", "conditional", "invalid", "unknown"]},
+        "checks": {"type": "array", "minItems": 6, "maxItems": 6, "items": {"$ref": "#/$defs/design_check"}},
+        "unresolved": {"$ref": "#/$defs/texts"}
+      }
+    },
+    "design_review": {
+      "description": "Static planning review, required in packet 1.1 and optional in legacy 1.0. Cover P0 and every reviewed plan exactly once and every unordered pair of change plans, never P0 pairs. Diversity is independent of planning relations and is not proof of competing alternatives. No numeric architecture/diversity score.",
+      "type": "object", "additionalProperties": false, "required": ["version", "pairwise", "plans"],
+      "properties": {
+        "version": {"const": "1.0"}, "pairwise": {"type": "array", "items": {"$ref": "#/$defs/design_pair"}},
+        "plans": {"type": "array", "items": {"$ref": "#/$defs/design_plan_review"}}
+      }
+    },
+    "critique_result": {
+      "type": "object", "additionalProperties": false, "required": ["context_revision", "reviewed_plans", "findings", "disagreements"],
+      "properties": {"context_revision": {"$ref": "#/$defs/revision"}, "reviewed_plans": {"type": "array", "items": {"$ref": "#/$defs/reviewed_plan"}}, "findings": {"type": "array", "items": {"$ref": "#/$defs/finding"}}, "disagreements": {"$ref": "#/$defs/texts"}, "design_review": {"$ref": "#/$defs/design_review"}}
+    },
+    "recommendation": {
+      "type": "object", "additionalProperties": false, "required": ["plan_id", "reason", "conditions"],
+      "properties": {"plan_id": {"type": ["string", "null"], "minLength": 1}, "plan_ids": {"$ref": "#/$defs/texts"}, "reason": {"$ref": "#/$defs/text"}, "conditions": {"$ref": "#/$defs/texts"}}
+    },
+    "decision": {
+      "type": "object", "additionalProperties": false, "required": ["status", "plan_id", "context_revision", "answer"],
+      "properties": {"status": {"enum": ["pending", "selected", "deferred", "rejected"]}, "plan_id": {"type": ["string", "null"], "minLength": 1}, "plan_ids": {"$ref": "#/$defs/texts"}, "context_revision": {"$ref": "#/$defs/revision"}, "answer": {"type": ["string", "null"], "minLength": 1}}
+    },
+    "run_record": {
+      "type": "object", "additionalProperties": false, "required": ["role", "context_id", "strategy_id", "context_revision", "batch_id", "call_id", "status", "trace_ref"],
+      "properties": {"role": {"enum": ["planner", "critic"]}, "context_id": {"$ref": "#/$defs/text"}, "strategy_id": {"type": ["string", "null"], "minLength": 1}, "context_revision": {"$ref": "#/$defs/revision"}, "batch_id": {"$ref": "#/$defs/text"}, "call_id": {"$ref": "#/$defs/text"}, "status": {"enum": ["completed", "failed"]}, "trace_ref": {"$ref": "#/$defs/text"}}
+    },
+    "planning_area": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "name", "scope", "objective", "success_scenarios"],
+      "properties": {
+        "id": {"$ref": "#/$defs/text"}, "name": {"$ref": "#/$defs/text"},
+        "scope": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/text"}},
+        "objective": {"$ref": "#/$defs/text"},
+        "success_scenarios": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/text"}}
+      }
+    },
+    "planning_assignment": {
+      "type": "object", "additionalProperties": false, "required": ["plan_id", "area_ids", "depends_on"],
+      "properties": {
+        "plan_id": {"$ref": "#/$defs/text"},
+        "area_ids": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/text"}},
+        "depends_on": {"$ref": "#/$defs/texts"}
+      }
+    },
+    "planning_relation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["plan_ids", "relationship", "compatibility", "benefit_overlap", "reason", "evidence_ids"],
+      "properties": {
+        "plan_ids": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"$ref": "#/$defs/text"}},
+        "relationship": {"enum": ["alternative", "complementary", "independent", "unknown"]},
+        "compatibility": {"enum": ["compatible", "conflicting", "unknown"]},
+        "benefit_overlap": {"enum": ["disjoint", "shared", "unknown"]},
+        "reason": {"$ref": "#/$defs/text"}, "evidence_ids": {"$ref": "#/$defs/texts"}
+      }
+    },
+    "planning": {
+      "description": "Packet 1.1 planning mode and review assertions. Alternatives: exactly one area, no dependencies, all relations alternative. Portfolio: at least two areas. Assign every change plan once, cover each area and all unordered change-plan pairs, exclude P0, require a dependency DAG. Nonblank text and cross-references are checked semantically by compare.py. Standalone planning derives IDs from assignments and cannot authenticate external plan IDs or evidence; the full decision_packet is the source of truth. Different areas do not imply independence, compatibility or disjoint benefits.",
+      "type": "object", "additionalProperties": false, "required": ["mode", "areas", "assignments", "relations"],
+      "properties": {
+        "mode": {"enum": ["alternatives", "portfolio"]},
+        "areas": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/planning_area"}},
+        "assignments": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/planning_assignment"}},
+        "relations": {"type": "array", "items": {"$ref": "#/$defs/planning_relation"}}
+      }
+    },
+    "decision_packet": {
+      "description": "Version 1.1 requires context 1.1, planning, design_review and at least three change plans excluding P0, with no upper limit. Legacy 1.0 retains two to three change plans and no planning/plan_ids fields. Version-specific requirements, references, selections and assessment verification require compare.py semantic checks; this limited schema alone is not authoritative.",
+      "type": "object", "additionalProperties": false, "required": ["schema_version", "context", "baseline", "plans", "critique", "recommendation", "decision", "run_record"],
+      "properties": {
+        "schema_version": {"enum": ["1.0", "1.1"]}, "context": {"$ref": "#/$defs/shared_context"}, "baseline": {"$ref": "#/$defs/plan_result"},
+        "plans": {"type": "array", "minItems": 2, "items": {"$ref": "#/$defs/plan_result"}}, "critique": {"$ref": "#/$defs/critique_result"},
+        "planning": {"$ref": "#/$defs/planning"},
+        "recommendation": {"$ref": "#/$defs/recommendation"}, "decision": {"$ref": "#/$defs/decision"}, "run_record": {"type": "array", "items": {"$ref": "#/$defs/run_record"}},
+        "assessment": {"type": "object"}
+      }
+    }
+  }
+}

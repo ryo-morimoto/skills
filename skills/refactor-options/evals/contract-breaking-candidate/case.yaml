@@ -1,0 +1,8 @@
+schema_version: "1.1"
+name: contract-breaking-candidate
+expected_outcome: |
+  Cのtuple逆順とKeyError化を具体的に検出してcontract fail・設計invalidとする。
+  方式が異なることは認めても妥当性の証明にはせず、Cをそのまま推薦・選択しない。
+  A/Bは各自の内容で評価し、一案の不備を全案へ無差別に適用しない。
+context:
+  scaffold_script: place-files.sh

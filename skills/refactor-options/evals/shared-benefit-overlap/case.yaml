@@ -1,0 +1,8 @@
+schema_version: "1.1"
+name: shared-benefit-overlap
+expected_outcome: |
+  同じ作業・削減scenarioの二重計上を検出し、A/Bの単純和を確定したセット総額・総便益にしない。
+  明示的な追加仮定による参考計算は許すが、相互作用・順序が不明なまま確定ROIや勝者へ昇格させない。
+  未知を保つだけで測定済み単体値まで捨てることも避ける。
+context:
+  scaffold_script: place-files.sh
